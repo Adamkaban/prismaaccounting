@@ -1,0 +1,193 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import ServiceHero from '~/components/service/ServiceHero.astro';
+import Deliverables from '~/components/service/Deliverables.astro';
+import Pricing from '~/components/service/Pricing.astro';
+import ServiceProcess from '~/components/service/ServiceProcess.astro';
+import FAQ from '~/components/home/FAQ.astro';
+import Section from '~/components/ui/Section.astro';
+import TallyEmbed from '~/components/forms/TallyEmbed.astro';
+import { SITE } from '~/site.config';
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Services', href: '/services/' },
+  { name: 'Corporate Tax (T2)', href: '/services/corporate-tax-t2/' },
+];
+
+const deliverables = [
+  {
+    title: 'T2 corporate return',
+    body: 'Full preparation and filing of your federal T2 corporation income tax return, including all required schedules. We handle both active and holding companies.',
+  },
+  {
+    title: 'Ontario CT23 (if applicable)',
+    body: 'Where required, we prepare and file the Ontario corporation tax return alongside the federal T2. Corporate structure determines which provincial forms apply.',
+  },
+  {
+    title: 'Financial statements',
+    body: 'Notice-to-reader financial statements prepared from your records: balance sheet, income statement, retained earnings. Required by most lenders and CRA on audit.',
+  },
+  {
+    title: 'GIFI and all schedules',
+    body: 'General Index of Financial Information mapped correctly, plus all SRED, dividend, shareholder loan, and capital cost allowance schedules that apply to your corporation.',
+  },
+];
+
+const pricingTiers = [
+  {
+    name: 'Dormant / Holdco',
+    price: '$799',
+    unit: '/ year',
+    blurb: 'Holding companies with no active business income and minimal transactions.',
+    features: [
+      'Federal T2 return',
+      'Nil or investment-only income',
+      'Notice-to-reader financials',
+      'Dividend and shareholder loan schedules',
+    ],
+  },
+  {
+    name: 'Operating Corp',
+    price: '$1,299',
+    unit: '/ year',
+    blurb: 'Active operating corporations with revenue up to $2M and standard complexity.',
+    featured: true,
+    features: [
+      'Federal T2 + Ontario CT23',
+      'Notice-to-reader financials',
+      'Full schedule package',
+      'CRA review support included',
+    ],
+  },
+  {
+    name: 'Complex / Multi-entity',
+    price: 'from $2,200',
+    unit: '/ year',
+    blurb: 'Multi-location, multi-shareholder, related-party transactions, or SRED claims.',
+    features: [
+      'All Operating Corp inclusions',
+      'Related-party and interco schedules',
+      'SRED claim coordination',
+      'Prior-year corrections available',
+    ],
+  },
+];
+
+const processSteps = [
+  {
+    n: '01',
+    title: 'Send your books',
+    body: 'Share your year-end QuickBooks or Xero file, or upload bank statements and invoices. We confirm the fiscal year-end and any outstanding issues.',
+  },
+  {
+    n: '02',
+    title: 'We prepare financials',
+    body: 'Books are reviewed, adjusted, and compiled into notice-to-reader financial statements. Any questions about unusual transactions are sent to you first.',
+  },
+  {
+    n: '03',
+    title: 'T2 and schedules drafted',
+    body: 'Corporate return and all applicable schedules prepared and reviewed internally. We flag any tax planning opportunities before filing.',
+  },
+  {
+    n: '04',
+    title: 'Director approval, then filed',
+    body: 'You review and authorize. We e-file with CRA, confirm the submission receipt, and send you the complete return package for your records.',
+  },
+];
+
+const faqItems = [
+  {
+    q: 'When is the T2 deadline for my corporation?',
+    a: 'The T2 return is due six months after your corporation\'s fiscal year-end. If your year-end is December 31, the deadline is June 30 of the following year. Any tax owing is due three months after year-end, not six.',
+  },
+  {
+    q: 'What if my books are not up to date?',
+    a: 'We can clean up and finalize your records as part of the engagement. Bookkeeping catch-up is quoted separately based on volume. Most corporate clients have us handle year-end cleanup and the T2 together.',
+  },
+  {
+    q: 'Do I need financial statements as well as a T2?',
+    a: 'Technically CRA requires only the GIFI data embedded in the T2, but most lenders, shareholders, and your own records require proper financial statements. We include notice-to-reader financials in every corporate return.',
+  },
+  {
+    q: 'What is the small business deduction?',
+    a: 'Canadian-controlled private corporations (CCPCs) pay a reduced federal rate of 9 percent on the first $500,000 of active business income - the small business deduction limit. We optimize shareholder compensation to maximize access to this rate.',
+  },
+  {
+    q: 'Can you file prior-year returns I missed?',
+    a: 'Yes. Late corporate returns attract a $25/day penalty up to $2,500 per return. We file all outstanding years and, where possible, request penalty waivers through CRA\'s taxpayer relief provisions.',
+  },
+  {
+    q: 'Do you handle SRED tax credit claims?',
+    a: 'Yes for standard SR&ED claims on qualifying R&D expenditures. Complex or large SR&ED projects with technical reports may require a specialist; we refer those cases and coordinate the technical and financial portions.',
+  },
+];
+---
+
+<BaseLayout
+  title="Corporate Tax T2 Toronto | Prisma Accounting"
+  description="T2 corporate tax returns with financial statements, GIFI, and all schedules for Toronto corporations. Fixed CAD pricing, Ontario CPAs."
+  path="/services/corporate-tax-t2/"
+  schemaVariant="service"
+  breadcrumbs={breadcrumbs}
+  faqItems={faqItems}
+  service={{
+    name: 'Corporate Tax (T2) Filing',
+    description:
+      'Preparation and filing of Canadian corporate income tax returns (T2) with financial statements and schedules for corporations in Toronto and Ontario.',
+    serviceType: 'Corporate tax preparation',
+  }}
+>
+  <ServiceHero
+    eyebrow="Corporate tax"
+    title="Corporate Tax (T2) in Toronto"
+    subtitle="T2 return, notice-to-reader financials, and every required schedule prepared and filed. Fixed CAD pricing, confirmed before work begins."
+    breadcrumbs={breadcrumbs}
+  />
+
+  <Deliverables
+    heading="What we prepare and file"
+    intro="Every T2 engagement covers all four areas. Pricing adjusts to your corporation's complexity, not to the clock."
+    items={deliverables}
+  />
+
+  <Pricing
+    heading="Flat CAD pricing"
+    intro="No hourly billing. Price confirmed in writing after a quick conversation about your fiscal year and transaction volume."
+    tiers={pricingTiers}
+    footnote="Prices in CAD plus HST. Bookkeeping catch-up, multi-year back-filing, and SRED claims quoted separately."
+  />
+
+  <ServiceProcess
+    heading="How a T2 gets filed"
+    intro="Most corporate returns are completed within two to three weeks of receiving clean books."
+    steps={processSteps}
+  />
+
+  <FAQ
+    id="faq"
+    heading="Corporate tax questions"
+    intro="Common questions from incorporated business owners in Ontario."
+    items={faqItems}
+  />
+
+  <Section id="quote" bg="elev" divider>
+    <div class="grid gap-10 md:grid-cols-12 items-start">
+      <div class="md:col-span-5">
+        <h2 class="text-4xl md:text-5xl font-medium tracking-tight leading-[1.1] text-balance">
+          Get a free quote
+        </h2>
+        <p class="mt-5 text-lg leading-relaxed text-[var(--color-ink-muted)] max-w-sm">
+          Tell us your fiscal year-end, revenue range, and number of shareholders. Fixed price back within one business day.
+        </p>
+        <p class="mt-6 text-sm text-[var(--color-ink-muted)]">
+          Prefer email? Write to <a href={`mailto:${SITE.contact.email}`} class="text-[var(--color-ink)] underline underline-offset-4 hover:text-[var(--color-accent)] transition-colors">{SITE.contact.email}</a>.
+        </p>
+      </div>
+      <div class="md:col-span-7">
+        <TallyEmbed title="Corporate tax quote" />
+      </div>
+    </div>
+  </Section>
+</BaseLayout>

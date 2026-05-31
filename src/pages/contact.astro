@@ -1,0 +1,115 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Section from '~/components/ui/Section.astro';
+import TallyEmbed from '~/components/forms/TallyEmbed.astro';
+import { SITE, SERVICES } from '~/site.config';
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Contact', href: '/contact/' },
+];
+---
+
+<BaseLayout
+  title="Contact Toronto Accountant | Free Quote"
+  description="Contact Prisma Accounting in Toronto for a free quote on personal tax, corporate tax, HST, payroll, bookkeeping, or incorporation. Response within one business day."
+  path="/contact/"
+  schemaVariant="page"
+  breadcrumbs={breadcrumbs}
+>
+  <section class="relative pt-20 md:pt-24 pb-0">
+    <div class="container-page">
+      <nav aria-label="Breadcrumb" class="mb-8 text-sm text-[var(--color-ink-muted)]">
+        <ol class="flex flex-wrap items-center gap-2">
+          {
+            breadcrumbs.map((b, i) => (
+              <li class="flex items-center gap-2">
+                {i > 0 && <span aria-hidden="true">/</span>}
+                {i < breadcrumbs.length - 1 ? (
+                  <a href={b.href} class="hover:text-[var(--color-ink)] transition-colors">
+                    {b.name}
+                  </a>
+                ) : (
+                  <span class="text-[var(--color-ink)]" aria-current="page">{b.name}</span>
+                )}
+              </li>
+            ))
+          }
+        </ol>
+      </nav>
+
+      <div class="max-w-3xl mb-14">
+        <h1
+          class="text-balance text-5xl md:text-6xl font-medium tracking-tight leading-[1.05] text-[var(--color-ink)]"
+        >
+          Get a free quote
+        </h1>
+        <p
+          class="mt-7 max-w-[56ch] text-lg md:text-xl leading-relaxed text-[var(--color-ink-muted)]"
+        >
+          Tell us what you need help with. We respond with a fixed CAD price and next steps within one business day.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Section id="quote" bg="elev" divider>
+    <div class="grid gap-14 md:grid-cols-12 items-start">
+      <div class="md:col-span-4">
+        <h2 class="text-2xl md:text-3xl font-medium tracking-tight">
+          How it works
+        </h2>
+        <ol class="mt-8 space-y-8">
+          <li class="flex gap-5">
+            <span class="font-mono text-sm text-[var(--color-ink-muted)] shrink-0 mt-1 w-6">01</span>
+            <div>
+              <p class="font-medium">Fill out the form</p>
+              <p class="mt-1 text-sm text-[var(--color-ink-muted)] leading-relaxed">Tell us which service you need and a bit about your situation. Takes about two minutes.</p>
+            </div>
+          </li>
+          <li class="flex gap-5 border-t border-[var(--color-line)] pt-8">
+            <span class="font-mono text-sm text-[var(--color-ink-muted)] shrink-0 mt-1 w-6">02</span>
+            <div>
+              <p class="font-medium">We send a fixed price</p>
+              <p class="mt-1 text-sm text-[var(--color-ink-muted)] leading-relaxed">A written quote with the exact CAD price comes back within one business day. No estimate ranges, no hourly billing.</p>
+            </div>
+          </li>
+          <li class="flex gap-5 border-t border-[var(--color-line)] pt-8">
+            <span class="font-mono text-sm text-[var(--color-ink-muted)] shrink-0 mt-1 w-6">03</span>
+            <div>
+              <p class="font-medium">You decide</p>
+              <p class="mt-1 text-sm text-[var(--color-ink-muted)] leading-relaxed">Accept the quote and we start. Decline and there is no charge. No pressure, no follow-up calls.</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="mt-12 pt-8 border-t border-[var(--color-line)]">
+          <p class="text-sm text-[var(--color-ink-muted)] font-medium">Prefer email directly?</p>
+          <a
+            href={`mailto:${SITE.contact.email}`}
+            class="mt-2 block text-[var(--color-ink)] hover:text-[var(--color-accent)] transition-colors font-medium"
+          >
+            {SITE.contact.email}
+          </a>
+        </div>
+
+        <div class="mt-8 pt-8 border-t border-[var(--color-line)]">
+          <p class="text-sm text-[var(--color-ink-muted)] font-medium mb-4">Services</p>
+          <ul class="space-y-2 text-sm">
+            {SERVICES.map((s) => (
+              <li>
+                <a href={s.href} class="text-[var(--color-ink)] hover:text-[var(--color-accent)] transition-colors">
+                  {s.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div class="md:col-span-7 md:col-start-6">
+        <TallyEmbed title="Contact form" />
+      </div>
+    </div>
+  </Section>
+</BaseLayout>

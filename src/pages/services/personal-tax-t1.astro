@@ -1,0 +1,193 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import ServiceHero from '~/components/service/ServiceHero.astro';
+import Deliverables from '~/components/service/Deliverables.astro';
+import Pricing from '~/components/service/Pricing.astro';
+import ServiceProcess from '~/components/service/ServiceProcess.astro';
+import FAQ from '~/components/home/FAQ.astro';
+import Section from '~/components/ui/Section.astro';
+import TallyEmbed from '~/components/forms/TallyEmbed.astro';
+import { SITE } from '~/site.config';
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Services', href: '/services/' },
+  { name: 'Personal Tax (T1)', href: '/services/personal-tax-t1/' },
+];
+
+const deliverables = [
+  {
+    title: 'All slips and credits',
+    body: 'T4, T4A, T5, T3, RRSP, charitable, medical, tuition, child care, disability. We track what is missing and chase it down.',
+  },
+  {
+    title: 'Self-employment (T2125)',
+    body: 'Business and professional income for sole proprietors and freelancers. Allowable expenses optimized for your industry.',
+  },
+  {
+    title: 'Capital gains and investments',
+    body: 'Brokerage T5008, crypto, principal residence, dispositions of investment property. Adjusted cost base handled correctly.',
+  },
+  {
+    title: 'Rental income (T776)',
+    body: 'Rental properties across Ontario and Canada. Capital cost allowance, eligible expenses, partial-year ownership.',
+  },
+];
+
+const pricingTiers = [
+  {
+    name: 'Simple',
+    price: '$99',
+    unit: '/ return',
+    blurb: 'One income source, standard credits, no complications.',
+    features: [
+      'One T4 employment slip',
+      'Standard credits (medical, donations)',
+      'CRA NETFILE submission',
+      'Three business day turnaround',
+    ],
+  },
+  {
+    name: 'Standard',
+    price: '$179',
+    unit: '/ return',
+    blurb: 'Most households. Multiple slips, RRSPs, common credits, kids.',
+    featured: true,
+    features: [
+      'Multiple T4 and T5 slips',
+      'RRSP, tuition, child care',
+      'Couples optimized together',
+      'CRA review support included',
+    ],
+  },
+  {
+    name: 'Complex',
+    price: 'from $349',
+    unit: '/ return',
+    blurb: 'Self-employment, rental income, capital gains, or prior years.',
+    features: [
+      'Self-employment T2125 schedules',
+      'Rental income T776',
+      'Capital gains and investments',
+      'Multi-year catch-up available',
+    ],
+  },
+];
+
+const processSteps = [
+  {
+    n: '01',
+    title: 'Quote in one business day',
+    body: 'Send a short note about your situation. We respond with a fixed price and a document checklist.',
+  },
+  {
+    n: '02',
+    title: 'Send your documents',
+    body: 'Upload slips and supporting records through our secure intake. Most clients are done in 15 minutes.',
+  },
+  {
+    n: '03',
+    title: 'We prepare and review',
+    body: 'A CPA prepares your return, then a second set of eyes reviews before anything is filed.',
+  },
+  {
+    n: '04',
+    title: 'You sign, we NETFILE',
+    body: 'You approve electronically. We submit to CRA, you receive a copy and your Notice of Assessment timeline.',
+  },
+];
+
+const faqItems = [
+  {
+    q: 'When is the T1 deadline for 2025 income?',
+    a: 'April 30, 2026 for most Canadians. If you or your spouse had self-employment income, the filing deadline moves to June 15, 2026, but any balance owing is still due April 30, 2026.',
+  },
+  {
+    q: 'My T4 or T5 slips have not arrived yet. Can we still start?',
+    a: 'Yes. We start once you book in. CRA Auto-fill My Return pulls most slips by mid-March, and we follow up on anything still missing.',
+  },
+  {
+    q: 'What if I owe instead of getting a refund?',
+    a: 'You pay CRA directly. We confirm the exact amount and the safest payment method. Setting up an installment plan is straightforward if cash flow is tight.',
+  },
+  {
+    q: 'Can you file prior years I missed?',
+    a: 'Yes. We file back as many years as needed. Where penalties or interest may apply, we discuss the Voluntary Disclosures Program before filing so you know your options.',
+  },
+  {
+    q: 'How are capital gains taxed right now?',
+    a: 'For most personal returns, 50 percent of net capital gains are included in taxable income. We track the latest CRA rules and apply whatever is in effect for the tax year you are filing.',
+  },
+  {
+    q: 'How long until I get my refund?',
+    a: 'For returns filed online with direct deposit set up, CRA typically issues refunds within two weeks. We confirm direct deposit details before filing so there is no delay.',
+  },
+];
+---
+
+<BaseLayout
+  title="Personal Tax T1 Toronto | Prisma Accounting"
+  description="Toronto CPAs filing T1 personal tax returns for employees, self-employed, investors, and landlords. Flat CAD pricing, CRA NETFILE, three-day turnaround."
+  path="/services/personal-tax-t1/"
+  schemaVariant="service"
+  breadcrumbs={breadcrumbs}
+  faqItems={faqItems}
+  service={{
+    name: 'Personal Tax (T1) Filing',
+    description:
+      'Preparation and filing of Canadian personal income tax returns (T1) for residents of Toronto and Ontario, including self-employment, rental, and investment income.',
+    serviceType: 'Tax preparation',
+  }}
+>
+  <ServiceHero
+    eyebrow="Personal tax"
+    title="Personal Tax (T1) in Toronto"
+    subtitle="Slips collected, deductions applied, return reviewed twice, and filed through CRA NETFILE. Flat CAD pricing so you know the cost before any work begins."
+    breadcrumbs={breadcrumbs}
+  />
+
+  <Deliverables
+    heading="What we file for you"
+    intro="Every T1 we touch covers these four areas. If a piece does not apply to your situation, the price comes down."
+    items={deliverables}
+  />
+
+  <Pricing
+    heading="Flat CAD pricing"
+    intro="No hourly billing. The price you see is the price you pay, confirmed in writing before any work starts."
+    tiers={pricingTiers}
+    footnote="Prices are in CAD, plus HST where applicable. Add-ons (extra rental property, additional T2125 business, foreign income disclosures) are quoted up front."
+  />
+
+  <ServiceProcess
+    heading="How a T1 gets filed"
+    intro="From quote to Notice of Assessment in days, not weeks. A typical timeline from first email to filed return."
+    steps={processSteps}
+  />
+
+  <FAQ
+    id="faq"
+    heading="T1 questions, answered"
+    intro="The questions we get most often during personal tax season."
+    items={faqItems}
+  />
+
+  <Section id="quote" bg="elev" divider>
+    <div class="grid gap-10 md:grid-cols-12 items-start">
+      <div class="md:col-span-5">
+        <h2 class="text-4xl md:text-5xl font-medium tracking-tight leading-[1.1] text-balance">
+          Get a free quote
+        </h2>
+        <p class="mt-5 text-lg leading-relaxed text-[var(--color-ink-muted)] max-w-sm">
+          Tell us what slips you have and any extras (self-employment, rental, capital gains). Fixed CAD price back within one business day.
+        </p>
+        <p class="mt-6 text-sm text-[var(--color-ink-muted)]">
+          Prefer email? Write to <a href={`mailto:${SITE.contact.email}`} class="text-[var(--color-ink)] underline underline-offset-4 hover:text-[var(--color-accent)] transition-colors">{SITE.contact.email}</a>.
+        </p>
+      </div>
+      <div class="md:col-span-7">
+        <TallyEmbed title="Personal tax quote" />
+      </div>
+    </div>
+  </Section>
+</BaseLayout>

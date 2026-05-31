@@ -1,0 +1,44 @@
+---
+import { SITE } from '~/site.config';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  noindex?: boolean;
+  ogImage?: string;
+  ogType?: string;
+}
+
+const { title, description, path, noindex = false, ogImage, ogType = 'website' } = Astro.props;
+
+const fullTitle = title.length > 0 ? title : SITE.defaultTitle;
+const fullDescription = description.length > 0 ? description : SITE.defaultDescription;
+const canonical = new URL(path, SITE.url).toString();
+const og = new URL(ogImage ?? SITE.social.ogImage, SITE.url).toString();
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={fullDescription} />
+<link rel="canonical" href={canonical} />
+
+<meta name="geo.region" content={SITE.geoRegion} />
+<meta name="geo.placename" content={SITE.geoPlacename} />
+<meta name="ICBM" content="43.6532, -79.3832" />
+
+{noindex && <meta name="robots" content="noindex,nofollow" />}
+
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={fullDescription} />
+<meta property="og:url" content={canonical} />
+<meta property="og:type" content={ogType} />
+<meta property="og:locale" content="en_CA" />
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:image" content={og} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={fullDescription} />
+<meta name="twitter:image" content={og} />
+
+<meta name="format-detection" content="telephone=no" />

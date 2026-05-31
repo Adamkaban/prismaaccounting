@@ -1,0 +1,26 @@
+---
+const partners = [
+  'Junction Auto',
+  'Riverdale Salon Co.',
+  'Bloor West Bakery',
+  'Leslieville Studio',
+  'High Park Clinic',
+];
+---
+
+<section aria-label="Working with businesses across the GTA" class="border-t border-[var(--color-line)] py-10 md:py-14">
+  <div class="container-page">
+    <p class="text-xs uppercase tracking-[0.18em] text-[var(--color-ink-muted)] font-medium">
+      Working with small businesses across the GTA
+    </p>
+    <ul class="mt-6 flex flex-wrap items-center gap-x-10 gap-y-4">
+      {
+        partners.map((p) => (
+          <li class="text-base md:text-lg text-[var(--color-ink)]/70 font-medium tracking-tight">
+            {p}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

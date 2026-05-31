@@ -1,0 +1,126 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { SITE } from '~/site.config';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const formattedDate = post.data.pubDate.toLocaleDateString('en-CA', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const isoDate = post.data.pubDate.toISOString().slice(0, 10);
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Blog', href: '/blog/' },
+  { name: post.data.title, href: `/blog/${post.id}/` },
+];
+---
+
+<BaseLayout
+  title={`${post.data.title} | Prisma Accounting`}
+  description={post.data.description}
+  path={`/blog/${post.id}/`}
+  ogType="article"
+  ogImage={post.data.heroImage}
+  schemaVariant="article"
+  breadcrumbs={breadcrumbs}
+  article={{
+    headline: post.data.title,
+    description: post.data.description,
+    datePublished: post.data.pubDate.toISOString().slice(0, 10),
+    dateModified: post.data.updatedDate?.toISOString().slice(0, 10),
+    author: post.data.author,
+    image: post.data.heroImage,
+    url: `/blog/${post.id}/`,
+  }}
+>
+  <article class="container-page pt-16 pb-24 md:pt-24 md:pb-32">
+    <div class="max-w-[720px]">
+      <nav aria-label="Breadcrumb" class="mb-10">
+        <ol class="flex items-center gap-2 text-sm text-[var(--color-ink-muted)] list-none p-0">
+          <li><a href="/" class="hover:text-[var(--color-accent)] transition-colors">Home</a></li>
+          <li aria-hidden="true" class="text-[var(--color-line)]">/</li>
+          <li><a href="/blog/" class="hover:text-[var(--color-accent)] transition-colors">Blog</a></li>
+          <li aria-hidden="true" class="text-[var(--color-line)]">/</li>
+          <li class="text-[var(--color-ink)] truncate max-w-[200px] md:max-w-none" aria-current="page">
+            {post.data.title}
+          </li>
+        </ol>
+      </nav>
+
+      <header class="mb-10 pb-8 border-b border-[var(--color-line)]">
+        <div class="flex items-center gap-4 mb-5">
+          <time
+            datetime={isoDate}
+            class="text-xs font-mono text-[var(--color-ink-muted)]"
+          >
+            {formattedDate}
+          </time>
+          <span class="text-[var(--color-line)]" aria-hidden="true">|</span>
+          <span class="text-xs text-[var(--color-ink-muted)]">{post.data.author}</span>
+        </div>
+        {post.data.tags && post.data.tags.length > 0 && (
+          <ul class="flex flex-wrap gap-2 mt-4 list-none p-0">
+            {post.data.tags.map((tag) => (
+              <li>
+                <span class="text-xs px-3 py-1 rounded-full border border-[var(--color-line)] text-[var(--color-ink-muted)]">
+                  {tag}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </header>
+
+      {post.data.heroImage && (
+        <div class="aspect-[16/9] rounded-xl overflow-hidden mb-10">
+          <img
+            src={post.data.heroImage}
+            alt={post.data.title}
+            class="w-full h-full object-cover"
+            loading="eager"
+            fetchpriority="high"
+            width="720"
+            height="405"
+          />
+        </div>
+      )}
+
+      <div class="prose">
+        <Content />
+      </div>
+
+      <footer class="mt-16 pt-10 border-t border-[var(--color-line)]">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div>
+            <p class="text-sm text-[var(--color-ink-muted)]">
+              Written by <span class="text-[var(--color-ink)] font-medium">{post.data.author}</span>
+            </p>
+            <p class="text-xs text-[var(--color-ink-muted)] mt-1">
+              {SITE.address.locality}, {SITE.address.region}
+            </p>
+          </div>
+          <a
+            href="/blog/"
+            class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hi)] transition-colors"
+          >
+            &larr; All articles
+          </a>
+        </div>
+      </footer>
+    </div>
+  </article>
+</BaseLayout>

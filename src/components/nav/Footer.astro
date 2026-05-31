@@ -1,0 +1,75 @@
+---
+import { FOOTER_LINKS, SITE } from '~/site.config';
+import LogoMark from '~/components/ui/LogoMark.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-[var(--color-line)] mt-20">
+  <div class="container-page py-16 md:py-20 grid gap-12 md:grid-cols-12">
+    <div class="md:col-span-5">
+      <a href="/" class="inline-flex items-center gap-2.5" aria-label={`${SITE.name} home`}>
+        <LogoMark size={32} />
+        <span class="font-medium tracking-tight">Prisma Accounting</span>
+      </a>
+      <p class="mt-5 text-sm text-[var(--color-ink-muted)] max-w-sm leading-relaxed">
+        Tax and bookkeeping for small businesses and self-employed in Toronto, Ontario. CRA-ready filing, transparent CAD pricing.
+      </p>
+      <address class="mt-6 not-italic text-sm text-[var(--color-ink-muted)] leading-relaxed">
+        {SITE.address.streetAddress}<br />
+        {SITE.address.locality}, {SITE.address.region} {SITE.address.postalCode}<br />
+        <a href={`mailto:${SITE.contact.email}`} class="hover:text-[var(--color-ink)] transition-colors">
+          {SITE.contact.email}
+        </a>
+      </address>
+    </div>
+
+    <div class="md:col-span-3">
+      <p class="text-xs uppercase tracking-[0.18em] text-[var(--color-ink-muted)] font-medium">Services</p>
+      <ul class="mt-5 space-y-3 text-sm">
+        {
+          FOOTER_LINKS.services.map((link) => (
+            <li>
+              <a href={link.href} class="text-[var(--color-ink)] hover:text-[var(--color-accent)] transition-colors">
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="md:col-span-2">
+      <p class="text-xs uppercase tracking-[0.18em] text-[var(--color-ink-muted)] font-medium">Company</p>
+      <ul class="mt-5 space-y-3 text-sm">
+        {
+          FOOTER_LINKS.company.map((link) => (
+            <li>
+              <a href={link.href} class="text-[var(--color-ink)] hover:text-[var(--color-accent)] transition-colors">
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="md:col-span-2">
+      <p class="text-xs uppercase tracking-[0.18em] text-[var(--color-ink-muted)] font-medium">Start</p>
+      <ul class="mt-5 space-y-3 text-sm">
+        <li>
+          <a href={`/${SITE.cta.anchor}`} class="text-[var(--color-ink)] hover:text-[var(--color-accent)] transition-colors">
+            {SITE.cta.primary}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-[var(--color-line)]">
+    <div class="container-page py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-xs text-[var(--color-ink-muted)]">
+      <p>&copy; {year} {SITE.name}. All rights reserved.</p>
+      <p>{SITE.address.locality}, {SITE.address.region} / {SITE.address.streetAddress}</p>
+    </div>
+  </div>
+</footer>

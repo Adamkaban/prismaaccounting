@@ -1,0 +1,13 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: extraClass = '' } = Astro.props;
+---
+
+<p
+  class={`text-xs uppercase tracking-[0.18em] text-[var(--color-ink-muted)] font-medium ${extraClass}`.trim()}
+>
+  <slot />
+</p>

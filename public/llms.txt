@@ -1,0 +1,31 @@
+# Prisma Accounting
+
+> Toronto accounting firm for small businesses and self-employed individuals in Ontario. Personal tax (T1), corporate tax (T2), HST/GST, payroll, bookkeeping, and incorporation. Fixed CAD pricing, CRA-ready filing.
+
+## Services
+
+- [Personal Tax (T1)](https://prismaaccounting.com/services/personal-tax-t1/): T1 personal income tax returns for employees, self-employed, investors, and landlords. Includes slips, deductions, CRA NETFILE. Flat CAD pricing.
+- [Corporate Tax (T2)](https://prismaaccounting.com/services/corporate-tax-t2/): T2 corporate income tax returns, financial statements, and CRA schedules for incorporated businesses.
+- [HST / GST](https://prismaaccounting.com/services/hst-gst/): HST/GST registration, quarterly and annual filings, input tax credit optimization.
+- [Payroll](https://prismaaccounting.com/services/payroll/): Monthly payroll processing, T4 slip preparation, CRA remittances.
+- [Incorporation](https://prismaaccounting.com/services/corporation-registration/): Federal or Ontario corporation setup, articles of incorporation, minute books.
+- [Bookkeeping](https://prismaaccounting.com/services/bookkeeping/): Monthly bookkeeping in QuickBooks or Xero for clean financial records.
+
+## About
+
+Prisma Accounting is a CPA-reviewed accounting firm based in Toronto, Ontario, Canada. We serve small business owners, sole proprietors, and incorporated companies across the Greater Toronto Area and Ontario remotely.
+
+Address: 150 King St W, Suite 200, Toronto, ON M5H 1J9
+Email: support@prismaaccounting.com
+Jurisdiction: Federal and Ontario (CRA, Ontario Business Registry)
+
+## Blog
+
+- [Ontario Tax Brackets 2026](https://prismaaccounting.com/blog/ontario-tax-brackets-2025/): Combined federal and Ontario marginal rates, surtax, BPA, and RRSP planning.
+- [Tax Filing Deadline 2026 Canada](https://prismaaccounting.com/blog/tax-filing-deadline-2026-canada/): T1, T2, HST, and payroll CRA deadlines for the 2025 tax year.
+- [Max CPP Contribution 2026](https://prismaaccounting.com/blog/max-cpp-contribution-2025/): YMPE, CPP2 rates, and payroll calculation for employers.
+- [CRA Meal Allowance 2026](https://prismaaccounting.com/blog/cra-meal-allowance-2025/): Simplified method rates and how to claim business meal expenses.
+
+## Key Canadian Tax Terms
+
+CRA (Canada Revenue Agency), T1 (personal income tax return), T2 (corporate income tax return), HST (Harmonized Sales Tax), NETFILE, EFILE, RRSP, CPP, T4, T5, T4A, YMPE, Ontario surtax, Ontario Business Registry, PIPEDA.

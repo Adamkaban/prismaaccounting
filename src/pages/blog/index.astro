@@ -1,0 +1,106 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { SITE } from '~/site.config';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Blog', href: '/blog/' },
+];
+---
+
+<BaseLayout
+  title="Tax & Accounting Blog - Toronto | Prisma Accounting"
+  description="CRA updates, tax tips, and accounting guides for Toronto businesses and self-employed. Practical advice on CPP, HST, T1, T2, and Ontario tax rules."
+  path="/blog/"
+  breadcrumbs={breadcrumbs}
+>
+  <section class="container-page pt-20 pb-12 md:pt-32 md:pb-16">
+    <p class="text-sm text-[var(--color-ink-muted)] mb-4">
+      <a href="/" class="hover:text-[var(--color-accent)] transition-colors">Home</a>
+      <span class="mx-2 text-[var(--color-line)]">/</span>
+      Blog
+    </p>
+    <h1 class="text-4xl md:text-5xl font-medium tracking-tight leading-[1.1] text-balance mb-5">
+      Toronto Tax &amp; Accounting Blog
+    </h1>
+    <p class="text-lg text-[var(--color-ink-muted)] max-w-[56ch] leading-relaxed">
+      CRA rules, tax deadlines, and accounting guides written for Toronto small businesses and self-employed individuals.
+    </p>
+  </section>
+
+  <section class="container-page pb-24 md:pb-32">
+    {posts.length === 0 ? (
+      <p class="text-[var(--color-ink-muted)]">No posts yet.</p>
+    ) : (
+      <ul class="grid grid-cols-1 md:grid-cols-2 gap-6 list-none p-0">
+        {posts.map((post) => {
+          const formattedDate = post.data.pubDate.toLocaleDateString('en-CA', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          });
+          return (
+            <li>
+              <a
+                href={`/blog/${post.id}/`}
+                class="group flex flex-col h-full bg-[var(--color-bg-elev)] border border-[var(--color-line)] rounded-2xl overflow-hidden hover:border-[var(--color-accent)]/40 transition-colors"
+              >
+                {post.data.heroImage && (
+                  <div class="aspect-[16/9] overflow-hidden">
+                    <img
+                      src={post.data.heroImage}
+                      alt={post.data.title}
+                      class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
+                      loading="lazy"
+                      decoding="async"
+                      width="400"
+                      height="225"
+                    />
+                  </div>
+                )}
+                <div class="flex flex-col flex-1 p-8">
+                <time
+                  datetime={post.data.pubDate.toISOString().slice(0, 10)}
+                  class="text-xs text-[var(--color-ink-muted)] font-mono mb-4 block"
+                >
+                  {formattedDate}
+                </time>
+                <h2 class="text-xl font-medium leading-snug tracking-tight text-[var(--color-ink)] group-hover:text-[var(--color-accent)] transition-colors mb-3">
+                  {post.data.title}
+                </h2>
+                <p class="text-sm text-[var(--color-ink-muted)] leading-relaxed flex-1 mb-6">
+                  {post.data.description}
+                </p>
+                <span class="text-sm font-medium text-[var(--color-accent)] group-hover:text-[var(--color-accent-hi)] transition-colors">
+                  Read article &rarr;
+                </span>
+                </div>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    )}
+  </section>
+
+  <section class="border-t border-[var(--color-line)]">
+    <div class="container-page py-20 md:py-24 max-w-[640px]">
+      <h2 class="text-2xl md:text-3xl font-medium tracking-tight mb-4">
+        Need accounting help in Toronto?
+      </h2>
+      <p class="text-[var(--color-ink-muted)] leading-relaxed mb-8">
+        Our team handles T1, T2, HST, payroll, and bookkeeping for small businesses and self-employed across Ontario.
+      </p>
+      <a
+        href="/contact/"
+        class="inline-flex items-center bg-[var(--color-accent)] text-[var(--color-bg-elev)] px-6 py-3 rounded-full font-medium hover:bg-[var(--color-accent-hi)] transition-colors active:translate-y-[1px]"
+      >
+        {SITE.cta.primary}
+      </a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,92 @@
+---
+import Section from '~/components/ui/Section.astro';
+import Button from '~/components/ui/Button.astro';
+import Reveal from '~/components/motion/Reveal.astro';
+import { SITE } from '~/site.config';
+
+interface Tier {
+  name: string;
+  price: string;
+  unit: string;
+  blurb: string;
+  features: string[];
+  featured?: boolean;
+}
+
+interface Props {
+  heading: string;
+  intro: string;
+  tiers: Tier[];
+  footnote?: string;
+}
+
+const { heading, intro, tiers, footnote } = Astro.props;
+---
+
+<Section id="pricing" bg="elev" divider>
+  <div class="max-w-3xl">
+    <h2 class="text-4xl md:text-5xl font-medium tracking-tight leading-[1.1] text-balance">
+      {heading}
+    </h2>
+    <p class="mt-5 max-w-[58ch] text-lg leading-relaxed text-[var(--color-ink-muted)]">
+      {intro}
+    </p>
+  </div>
+
+  <Reveal as="div" class="mt-14 grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+    {
+      tiers.map((tier) => (
+        <div
+          class={`rounded-2xl border p-7 md:p-8 flex flex-col ${tier.featured ? 'bg-[var(--color-ink)] text-[var(--color-bg-elev)] border-[var(--color-ink)]' : 'bg-[var(--color-bg)] border-[var(--color-line)]'}`}
+        >
+          <div class="flex items-baseline justify-between gap-3">
+            <h3 class="text-xl md:text-2xl font-medium tracking-tight">{tier.name}</h3>
+            {tier.featured && (
+              <span class="text-xs uppercase tracking-[0.14em] font-medium opacity-80">Most common</span>
+            )}
+          </div>
+          <div class="mt-6 flex items-baseline gap-2">
+            <span class="font-mono text-4xl md:text-5xl font-medium tracking-tight">{tier.price}</span>
+            <span class={`font-mono text-sm ${tier.featured ? 'opacity-70' : 'text-[var(--color-ink-muted)]'}`}>
+              CAD {tier.unit}
+            </span>
+          </div>
+          <p class={`mt-3 leading-relaxed ${tier.featured ? 'opacity-80' : 'text-[var(--color-ink-muted)]'}`}>
+            {tier.blurb}
+          </p>
+          <ul class="mt-6 space-y-3 text-sm">
+            {tier.features.map((f) => (
+              <li class="flex items-start gap-3">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.25"
+                  class={`mt-1 shrink-0 ${tier.featured ? 'text-[var(--color-bg-elev)]' : 'text-[var(--color-accent)]'}`}
+                  aria-hidden="true"
+                >
+                  <path d="M5 12l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span>{f}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-8 pt-2">
+            <Button
+              href={SITE.cta.anchor}
+              variant={tier.featured ? 'inverted' : 'primary'}
+            >
+              {SITE.cta.primary}
+            </Button>
+          </div>
+        </div>
+      ))
+    }
+  </Reveal>
+
+  {footnote && (
+    <p class="mt-8 text-sm text-[var(--color-ink-muted)] max-w-2xl">{footnote}</p>
+  )}
+</Section>

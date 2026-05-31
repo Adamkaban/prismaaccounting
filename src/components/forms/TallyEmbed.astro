@@ -1,0 +1,65 @@
+---
+import { SITE } from '~/site.config';
+
+interface Props {
+  title?: string;
+  height?: number;
+  formId?: string;
+}
+
+const {
+  title = 'Get a free quote',
+  height = SITE.tally.height,
+  formId = SITE.tally.formId,
+} = Astro.props;
+
+const src = `https://tally.so/embed/${formId}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`;
+---
+
+<div
+  class="rounded-2xl bg-[var(--color-bg-elev)] border border-[var(--color-line)] p-2 md:p-3"
+  style={`min-height:${height}px`}
+>
+  <iframe
+    data-tally-src={src}
+    loading="lazy"
+    width="100%"
+    height={height}
+    frameborder="0"
+    marginheight="0"
+    marginwidth="0"
+    title={title}
+    style="width:100%;border:0;display:block;background:transparent;"
+  ></iframe>
+</div>
+
+<script>
+  function loadTally() {
+    const w = 'https://tally.so/widgets/embed.js';
+    const hydrate = () => {
+      const tally = (window as any).Tally;
+      if (tally && typeof tally.loadEmbeds === 'function') {
+        tally.loadEmbeds();
+        return;
+      }
+      document.querySelectorAll<HTMLIFrameElement>('iframe[data-tally-src]').forEach((iframe) => {
+        const src = iframe.getAttribute('data-tally-src');
+        if (src && !iframe.src) iframe.src = src;
+      });
+    };
+
+    if (document.querySelector(`script[src="${w}"]`)) {
+      hydrate();
+      return;
+    }
+    const s = document.createElement('script');
+    s.src = w;
+    s.async = true;
+    s.onload = hydrate;
+    s.onerror = hydrate;
+    document.body.appendChild(s);
+  }
+
+  if (document.readyState === 'complete') loadTally();
+  else window.addEventListener('load', loadTally, { once: true });
+</script>

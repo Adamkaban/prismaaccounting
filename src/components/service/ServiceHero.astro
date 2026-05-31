@@ -1,0 +1,61 @@
+---
+import Button from '~/components/ui/Button.astro';
+import Eyebrow from '~/components/ui/Eyebrow.astro';
+import { SITE } from '~/site.config';
+
+interface BreadcrumbItem {
+  name: string;
+  href: string;
+}
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  breadcrumbs: BreadcrumbItem[];
+}
+
+const { eyebrow, title, subtitle, breadcrumbs } = Astro.props;
+---
+
+<section class="relative pt-20 md:pt-24 pb-14 md:pb-20">
+  <div class="container-page">
+    <nav aria-label="Breadcrumb" class="mb-8 text-sm text-[var(--color-ink-muted)]">
+      <ol class="flex flex-wrap items-center gap-2">
+        {
+          breadcrumbs.map((b, i) => (
+            <li class="flex items-center gap-2">
+              {i > 0 && <span aria-hidden="true">/</span>}
+              {i < breadcrumbs.length - 1 ? (
+                <a href={b.href} class="hover:text-[var(--color-ink)] transition-colors">
+                  {b.name}
+                </a>
+              ) : (
+                <span class="text-[var(--color-ink)]" aria-current="page">{b.name}</span>
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </nav>
+
+    <Eyebrow class="mb-6">{eyebrow}</Eyebrow>
+
+    <div class="max-w-4xl">
+      <h1
+        class="text-balance text-5xl md:text-6xl font-medium tracking-tight leading-[1.05] text-[var(--color-ink)]"
+      >
+        {title}
+      </h1>
+      <p
+        class="mt-7 max-w-[60ch] text-lg md:text-xl leading-relaxed text-[var(--color-ink-muted)]"
+      >
+        {subtitle}
+      </p>
+      <div class="mt-9 flex flex-wrap items-center gap-3">
+        <Button href={SITE.cta.anchor} size="lg">{SITE.cta.primary}</Button>
+        <Button href="#pricing" variant="secondary" size="lg">See pricing</Button>
+      </div>
+    </div>
+  </div>
+</section>

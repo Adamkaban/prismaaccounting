@@ -1,0 +1,200 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Section from '~/components/ui/Section.astro';
+import Reveal from '~/components/motion/Reveal.astro';
+import Button from '~/components/ui/Button.astro';
+import { SITE, SERVICES } from '~/site.config';
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/about/' },
+];
+
+const values = [
+  {
+    title: 'Fixed prices, in writing',
+    body: 'Every engagement starts with a written quote. The number you see is the number you pay. No hourly surprises at the end of the month.',
+  },
+  {
+    title: 'CRA, handled',
+    body: 'We know the CRA correspondence cycle inside out. Notices, review letters, audit requests - we respond, you get the update.',
+  },
+  {
+    title: 'Toronto, Ontario focus',
+    body: 'We serve small businesses and self-employed Canadians in Ontario. We know the provincial rules, the local rates, and the CRA Toronto Tax Services Office.',
+  },
+  {
+    title: 'No jargon',
+    body: 'We explain what we are doing and why. If something changes in the tax code that affects you, we tell you before you file, not after.',
+  },
+];
+---
+
+<BaseLayout
+  title="Toronto Accounting Firm | Prisma Accounting"
+  description="Prisma Accounting is a Toronto accounting firm for small businesses and self-employed. Personal tax, corporate tax, HST, payroll, bookkeeping. Fixed CAD pricing."
+  path="/about/"
+  schemaVariant="page"
+  breadcrumbs={breadcrumbs}
+>
+  <section class="relative pt-20 md:pt-24 pb-14 md:pb-20">
+    <div class="container-page">
+      <nav aria-label="Breadcrumb" class="mb-8 text-sm text-[var(--color-ink-muted)]">
+        <ol class="flex flex-wrap items-center gap-2">
+          {
+            breadcrumbs.map((b, i) => (
+              <li class="flex items-center gap-2">
+                {i > 0 && <span aria-hidden="true">/</span>}
+                {i < breadcrumbs.length - 1 ? (
+                  <a href={b.href} class="hover:text-[var(--color-ink)] transition-colors">
+                    {b.name}
+                  </a>
+                ) : (
+                  <span class="text-[var(--color-ink)]" aria-current="page">{b.name}</span>
+                )}
+              </li>
+            ))
+          }
+        </ol>
+      </nav>
+
+      <div class="max-w-4xl">
+        <h1
+          class="text-balance text-5xl md:text-6xl font-medium tracking-tight leading-[1.05] text-[var(--color-ink)]"
+        >
+          Toronto accounting firm for people who have better things to do
+        </h1>
+        <p
+          class="mt-7 max-w-[60ch] text-lg md:text-xl leading-relaxed text-[var(--color-ink-muted)]"
+        >
+          Prisma Accounting is a CPA-reviewed accounting firm based in Toronto. We work with small business owners, sole proprietors, and incorporated companies across Ontario - Toronto, Scarborough, Etobicoke, North York, Mississauga, and beyond. Our job is to keep you CRA-compliant, minimize your tax, and stay out of your way.
+        </p>
+        <div class="mt-10 flex flex-wrap gap-4">
+          {[
+            { label: 'CPA-reviewed filings', sub: 'Every return reviewed before filing' },
+            { label: 'Ontario-registered firm', sub: 'Federal and provincial jurisdiction' },
+            { label: 'CRA-authorized filer', sub: 'EFILE and NETFILE certified' },
+            { label: 'Fixed CAD pricing', sub: 'Written quote before any work starts' },
+          ].map((item) => (
+            <div class="rounded-2xl border border-[var(--color-line)] bg-[var(--color-bg-elev)] px-6 py-4">
+              <p class="font-medium text-sm">{item.label}</p>
+              <p class="mt-0.5 text-xs text-[var(--color-ink-muted)]">{item.sub}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Section divider>
+    <div class="grid gap-16 md:grid-cols-12 items-start">
+      <div class="md:col-span-5">
+        <h2 class="text-4xl md:text-5xl font-medium tracking-tight leading-[1.1] text-balance">
+          Who we work with
+        </h2>
+        <p class="mt-5 text-lg leading-relaxed text-[var(--color-ink-muted)] max-w-[48ch]">
+          We focus on three groups: incorporated small businesses, self-employed professionals, and individual Canadians with more complex personal tax situations.
+        </p>
+        <p class="mt-4 text-lg leading-relaxed text-[var(--color-ink-muted)] max-w-[48ch]">
+          Most of our clients come to us because their tax situation outgrew a software product, or because their previous accountant was slow, vague about pricing, or hard to reach.
+        </p>
+        <p class="mt-4 text-lg leading-relaxed text-[var(--color-ink-muted)] max-w-[48ch]">
+          We serve small businesses and self-employed Canadians across the Greater Toronto Area - including Toronto, Scarborough, North York, Etobicoke, Mississauga, and Brampton - and across Ontario remotely. No in-person meeting required.
+        </p>
+      </div>
+      <div class="md:col-span-6 md:col-start-7">
+        <Reveal as="ul" class="grid grid-cols-1 gap-4">
+          {values.map((v) => (
+            <li class="rounded-2xl bg-[var(--color-bg-elev)] border border-[var(--color-line)] p-7">
+              <h3 class="text-xl font-medium tracking-tight">{v.title}</h3>
+              <p class="mt-2 text-[var(--color-ink-muted)] leading-relaxed">{v.body}</p>
+            </li>
+          ))}
+        </Reveal>
+      </div>
+    </div>
+  </Section>
+
+  <Section bg="elev" divider>
+    <div class="max-w-3xl">
+      <h2 class="text-4xl md:text-5xl font-medium tracking-tight leading-[1.1] text-balance">
+        What we do
+      </h2>
+      <p class="mt-5 text-lg leading-relaxed text-[var(--color-ink-muted)] max-w-[58ch]">
+        Six service areas, all with fixed CAD pricing.
+      </p>
+    </div>
+    <Reveal as="ul" class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-5">
+      {SERVICES.map((s) => (
+        <li>
+          <a
+            href={s.href}
+            class="block h-full rounded-2xl border border-[var(--color-line)] bg-[var(--color-bg)] p-7 hover:border-[var(--color-accent)] transition-colors group"
+          >
+            <h3 class="text-xl font-medium tracking-tight group-hover:text-[var(--color-accent)] transition-colors">
+              {s.title}
+            </h3>
+            <p class="mt-2 text-sm text-[var(--color-ink-muted)] leading-relaxed">{s.oneLiner}</p>
+          </a>
+        </li>
+      ))}
+    </Reveal>
+  </Section>
+
+  <Section divider>
+    <div class="grid gap-12 md:grid-cols-12 items-center">
+      <div class="md:col-span-7">
+        <h2 class="text-4xl md:text-5xl font-medium tracking-tight leading-[1.1] text-balance">
+          Toronto, Ontario
+        </h2>
+        <p class="mt-5 text-lg leading-relaxed text-[var(--color-ink-muted)] max-w-[52ch]">
+          We are based in Toronto and work with Ontario businesses day to day. That means we know Ontario-specific rules: the employer health tax, the Ontario small business deduction, provincial payroll thresholds, and the Ontario Business Registry.
+        </p>
+        <p class="mt-4 text-lg leading-relaxed text-[var(--color-ink-muted)] max-w-[52ch]">
+          All pricing is in Canadian dollars. All filings are to CRA and the applicable provincial authorities. No hidden exchange rates, no offshore billing.
+        </p>
+      </div>
+      <div class="md:col-span-4 md:col-start-9">
+        <div class="rounded-2xl bg-[var(--color-bg-elev)] border border-[var(--color-line)] p-8 space-y-5">
+          <div>
+            <p class="text-xs uppercase tracking-[0.14em] text-[var(--color-ink-muted)] font-medium">Location</p>
+            <p class="mt-1 font-medium">Toronto, Ontario, Canada</p>
+          </div>
+          <div class="border-t border-[var(--color-line)] pt-5">
+            <p class="text-xs uppercase tracking-[0.14em] text-[var(--color-ink-muted)] font-medium">Jurisdiction</p>
+            <p class="mt-1 font-medium">Federal and Ontario</p>
+          </div>
+          <div class="border-t border-[var(--color-line)] pt-5">
+            <p class="text-xs uppercase tracking-[0.14em] text-[var(--color-ink-muted)] font-medium">Currency</p>
+            <p class="mt-1 font-mono font-medium">CAD</p>
+          </div>
+          <div class="border-t border-[var(--color-line)] pt-5">
+            <p class="text-xs uppercase tracking-[0.14em] text-[var(--color-ink-muted)] font-medium">Email</p>
+            <p class="mt-1 font-medium">
+              <a href={`mailto:${SITE.contact.email}`} class="hover:text-[var(--color-accent)] transition-colors">
+                {SITE.contact.email}
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <Section bg="elev" divider>
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+      <div class="max-w-xl">
+        <h2 class="text-4xl md:text-5xl font-medium tracking-tight leading-[1.1] text-balance">
+          Ready to get started?
+        </h2>
+        <p class="mt-5 text-lg leading-relaxed text-[var(--color-ink-muted)]">
+          Send a short note about your situation. We respond with a fixed price and next steps within one business day.
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-4 shrink-0">
+        <Button href="/contact/" size="lg">{SITE.cta.primary}</Button>
+        <Button href="/services/" variant="secondary" size="lg">View services</Button>
+      </div>
+    </div>
+  </Section>
+</BaseLayout>

@@ -1,0 +1,82 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Section from '~/components/ui/Section.astro';
+import { SITE } from '~/site.config';
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Privacy Policy', href: '/privacy-policy/' },
+];
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description="How Prisma Accounting collects, uses, and protects your personal information under PIPEDA and Ontario privacy law."
+  path="/privacy-policy/"
+  breadcrumbs={breadcrumbs}
+>
+  <Section as="header" class="pt-24 md:pt-28 pb-10 md:pb-12">
+    <p class="text-xs uppercase tracking-[0.18em] text-[var(--color-ink-muted)] font-medium">Legal</p>
+    <h1 class="mt-5 text-4xl md:text-6xl font-medium tracking-tight leading-[1.05] text-balance">
+      Privacy Policy
+    </h1>
+    <p class="mt-5 text-[var(--color-ink-muted)]">Last updated: May 31, 2026</p>
+  </Section>
+
+  <Section class="py-0 pb-24">
+    <div class="max-w-3xl space-y-10 text-[var(--color-ink-muted)] leading-relaxed">
+      <p>
+        Prisma Accounting ("we", "us") is committed to protecting your personal information under the federal Personal Information Protection and Electronic Documents Act (PIPEDA) and applicable Ontario privacy law. This page explains what we collect, why, and how to reach us with questions.
+      </p>
+
+      <div>
+        <h2 class="text-2xl md:text-3xl font-medium text-[var(--color-ink)] tracking-tight">Information we collect</h2>
+        <p class="mt-3">
+          When you request a quote or use our services, we collect contact details (name, email), tax-relevant information you provide (slips, statements, prior returns), and basic technical data (IP address, browser type) for security and analytics.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-2xl md:text-3xl font-medium text-[var(--color-ink)] tracking-tight">How we use it</h2>
+        <p class="mt-3">
+          We use your information to prepare and file your returns, respond to inquiries, send service updates, and meet our legal and professional record-keeping obligations.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-2xl md:text-3xl font-medium text-[var(--color-ink)] tracking-tight">How we share it</h2>
+        <p class="mt-3">
+          We share information with the Canada Revenue Agency (CRA) and other tax authorities only as needed to file your returns. We use vetted Canadian or compliant service providers for hosting, email, and form intake. We do not sell your information.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-2xl md:text-3xl font-medium text-[var(--color-ink)] tracking-tight">How long we keep it</h2>
+        <p class="mt-3">
+          We keep client records for the period required by CRA and professional standards (currently six years from the end of the relevant tax year), after which records are securely destroyed.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-2xl md:text-3xl font-medium text-[var(--color-ink)] tracking-tight">Your rights</h2>
+        <p class="mt-3">
+          You can ask us what information we hold about you, request corrections, or ask us to delete information that is not subject to mandatory retention. Contact us at <a href={`mailto:${SITE.contact.email}`} class="text-[var(--color-ink)] underline underline-offset-4">{SITE.contact.email}</a>.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-2xl md:text-3xl font-medium text-[var(--color-ink)] tracking-tight">Cookies</h2>
+        <p class="mt-3">
+          This site uses minimal cookies for basic functionality. We do not use cross-site advertising trackers. Embedded Tally forms may set their own cookies governed by Tally's privacy policy.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-2xl md:text-3xl font-medium text-[var(--color-ink)] tracking-tight">Contact</h2>
+        <p class="mt-3">
+          Questions about this policy: <a href={`mailto:${SITE.contact.email}`} class="text-[var(--color-ink)] underline underline-offset-4">{SITE.contact.email}</a>. Toronto, Ontario, Canada.
+        </p>
+      </div>
+    </div>
+  </Section>
+</BaseLayout>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#0F4D3A"/>
+  <!-- P lettermark: geometric paths, no font dependency -->
+  <path
+    fill-rule="evenodd"
+    fill="#F5F2EC"
+    d="
+      M16,50 L16,14 L34,14
+      C47,14 47,35 34,35
+      L23,35 L23,50 Z
+      M23,20 L33,20
+      C40,20 40,29 33,29
+      L23,29 Z
+    "
+  />
+</svg>

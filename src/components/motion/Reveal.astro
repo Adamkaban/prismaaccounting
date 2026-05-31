@@ -1,0 +1,77 @@
+---
+interface Props {
+  as?: 'div' | 'section' | 'article' | 'ul' | 'ol' | 'header';
+  stagger?: number;
+  delay?: number;
+  y?: number;
+  duration?: number;
+  class?: string;
+}
+
+const {
+  as: Tag = 'div',
+  stagger = 0.08,
+  delay = 0,
+  y = 16,
+  duration = 0.55,
+  class: extraClass = '',
+} = Astro.props;
+---
+
+<Tag
+  data-reveal
+  data-stagger={stagger}
+  data-delay={delay}
+  data-y={y}
+  data-duration={duration}
+  class={extraClass}
+>
+  <slot />
+</Tag>
+
+<script>
+  import { animate, inView } from 'motion';
+
+  const prefersReducedMotion =
+    window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const containers = document.querySelectorAll<HTMLElement>('[data-reveal]');
+
+  containers.forEach((container) => {
+    if (container.dataset.revealBound === '1') return;
+    container.dataset.revealBound = '1';
+
+    const stagger = Number(container.dataset.stagger ?? '0.08');
+    const delay = Number(container.dataset.delay ?? '0');
+    const y = Number(container.dataset.y ?? '16');
+    const duration = Number(container.dataset.duration ?? '0.55');
+
+    const children = Array.from(container.children) as HTMLElement[];
+    if (children.length === 0) return;
+
+    if (prefersReducedMotion) {
+      children.forEach((el) => {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      });
+      return;
+    }
+
+    children.forEach((el) => {
+      el.style.opacity = '0';
+      el.style.transform = `translateY(${y}px)`;
+      el.style.willChange = 'opacity, transform';
+    });
+
+    inView(container, () => {
+      children.forEach((el, i) => {
+        animate(
+          el,
+          { opacity: [0, 1], transform: [`translateY(${y}px)`, 'translateY(0px)'] },
+          { duration, delay: delay + i * stagger, easing: [0.22, 1, 0.36, 1] },
+        );
+      });
+      return () => {};
+    });
+  });
+</script>

@@ -1,0 +1,189 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import ServiceHero from '~/components/service/ServiceHero.astro';
+import Deliverables from '~/components/service/Deliverables.astro';
+import Pricing from '~/components/service/Pricing.astro';
+import ServiceProcess from '~/components/service/ServiceProcess.astro';
+import FAQ from '~/components/home/FAQ.astro';
+import Section from '~/components/ui/Section.astro';
+import TallyEmbed from '~/components/forms/TallyEmbed.astro';
+import { SITE } from '~/site.config';
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Services', href: '/services/' },
+  { name: 'Payroll', href: '/services/payroll/' },
+];
+
+const deliverables = [
+  {
+    title: 'Monthly payroll run',
+    body: 'Gross pay, CPP, EI, and income tax deductions calculated for each employee or owner-manager. Pay stubs generated and sent directly to employees on your schedule.',
+  },
+  {
+    title: 'CRA remittances',
+    body: 'Source deductions remitted to CRA on time every period. We track your remittance schedule (regular, quarterly, or accelerated) and confirm each payment.',
+  },
+  {
+    title: 'T4 slips and T4 Summary',
+    body: 'Year-end T4 preparation for all employees and filing of the T4 Summary with CRA by the February 28 deadline. ROE preparation when an employee leaves.',
+  },
+  {
+    title: 'New hire and payroll setup',
+    body: 'CRA payroll account registration, employee onboarding, TD1 collection, and first-run setup. We also handle transitions from another provider or manual payroll.',
+  },
+];
+
+const pricingTiers = [
+  {
+    name: 'Up to 3 employees',
+    price: '$99',
+    unit: '/ month',
+    blurb: 'Solo operators, owner-managers, or micro teams.',
+    features: [
+      'Monthly payroll run',
+      'CRA remittances',
+      'Pay stub delivery',
+      'Year-end T4 filing included',
+    ],
+  },
+  {
+    name: 'Up to 10 employees',
+    price: '$199',
+    unit: '/ month',
+    blurb: 'Growing small businesses with regular payroll needs.',
+    featured: true,
+    features: [
+      'Monthly payroll run',
+      'CRA remittances',
+      'Pay stub delivery',
+      'Year-end T4 filing included',
+    ],
+  },
+  {
+    name: '11-25 employees',
+    price: 'from $349',
+    unit: '/ month',
+    blurb: 'Larger teams, multiple pay rates, or bi-weekly schedules.',
+    features: [
+      'Bi-weekly or monthly run',
+      'Multi-rate and overtime support',
+      'CRA remittances',
+      'Year-end T4 filing included',
+    ],
+  },
+];
+
+const processSteps = [
+  {
+    n: '01',
+    title: 'Setup and onboarding',
+    body: 'We collect employee data, TD1 forms, and your CRA payroll account number. If you need a payroll account registered, we handle that too.',
+  },
+  {
+    n: '02',
+    title: 'You send payroll data',
+    body: 'Each period, you send hours worked or confirm salary amounts. Takes five minutes for most clients.',
+  },
+  {
+    n: '03',
+    title: 'We calculate and confirm',
+    body: 'Gross pay, all deductions, and net pay calculated. We send you a summary to approve before releasing anything.',
+  },
+  {
+    n: '04',
+    title: 'Stubs sent, CRA paid',
+    body: 'Pay stubs sent to employees, source deductions remitted to CRA on the correct schedule. Confirmation shared with you.',
+  },
+];
+
+const faqItems = [
+  {
+    q: 'When are source deductions due to CRA?',
+    a: 'Most small employers remit by the 15th of the month following the pay period. New employers and those CRA designates as regular remitters follow this schedule. Accelerated remitters (usually businesses with over $25,000 average monthly withholdings) remit twice monthly. We track your classification and never miss a deadline.',
+  },
+  {
+    q: 'What is an owner-manager payroll?',
+    a: 'If you run a corporation, you can pay yourself a salary, dividends, or a mix of both. Salary requires a payroll account and T4 filing. Dividends do not. The optimal split depends on your marginal tax rate, RRSP room, CPP contributions, and business income. We model this for you at year-end.',
+  },
+  {
+    q: 'Can you issue Records of Employment (ROEs) when employees leave?',
+    a: 'Yes. ROEs must be issued within five calendar days of the first day of interruption of earnings. We prepare and submit ROEs electronically to Service Canada as part of your payroll engagement.',
+  },
+  {
+    q: 'We have been doing payroll manually. Can you take it over mid-year?',
+    a: 'Yes. We review your year-to-date figures, reconcile against CRA records, and take over from the next pay period. Any discrepancies are corrected before year-end T4 filing.',
+  },
+  {
+    q: 'What happens if CRA has a payroll query or audit?',
+    a: 'Payroll audit support is included in your engagement. We respond to CRA correspondence, provide working papers, and represent you through the review.',
+  },
+];
+---
+
+<BaseLayout
+  title="Payroll Services Toronto | Prisma Accounting"
+  description="Payroll processing for Toronto small businesses. Monthly run, CRA source deduction remittances, T4 slips, ROEs. Flat monthly CAD rate."
+  path="/services/payroll/"
+  schemaVariant="service"
+  breadcrumbs={breadcrumbs}
+  faqItems={faqItems}
+  service={{
+    name: 'Payroll Services',
+    description:
+      'Monthly payroll processing, CRA source deduction remittances, T4 filing, and ROE preparation for small businesses in Toronto and Ontario.',
+    serviceType: 'Payroll processing',
+  }}
+>
+  <ServiceHero
+    eyebrow="Payroll"
+    title="Payroll Services in Toronto"
+    subtitle="Monthly payroll run, CRA source deduction remittances, T4 slips at year-end. Flat monthly rate so payroll is never a surprise."
+    breadcrumbs={breadcrumbs}
+  />
+
+  <Deliverables
+    heading="What we run every pay period"
+    intro="Every payroll engagement covers all four areas. One flat monthly price regardless of how many runs you need."
+    items={deliverables}
+  />
+
+  <Pricing
+    heading="Flat monthly pricing"
+    intro="Monthly rate confirmed up front. No per-payslip fees, no year-end surcharges."
+    tiers={pricingTiers}
+    footnote="Prices in CAD plus HST. Payroll setup for new clients is a one-time $199 fee. Bi-weekly schedules available at +25% on the monthly rate."
+  />
+
+  <ServiceProcess
+    heading="How payroll works"
+    intro="Five minutes of work per period for most clients. We handle the rest."
+    steps={processSteps}
+  />
+
+  <FAQ
+    id="faq"
+    heading="Payroll questions"
+    intro="What small business owners in Ontario ask us most about payroll."
+    items={faqItems}
+  />
+
+  <Section id="quote" bg="elev" divider>
+    <div class="grid gap-10 md:grid-cols-12 items-start">
+      <div class="md:col-span-5">
+        <h2 class="text-4xl md:text-5xl font-medium tracking-tight leading-[1.1] text-balance">
+          Get a free quote
+        </h2>
+        <p class="mt-5 text-lg leading-relaxed text-[var(--color-ink-muted)] max-w-sm">
+          Tell us how many employees you have, your pay frequency, and whether you need setup from scratch or a transfer from another provider.
+        </p>
+        <p class="mt-6 text-sm text-[var(--color-ink-muted)]">
+          Prefer email? Write to <a href={`mailto:${SITE.contact.email}`} class="text-[var(--color-ink)] underline underline-offset-4 hover:text-[var(--color-accent)] transition-colors">{SITE.contact.email}</a>.
+        </p>
+      </div>
+      <div class="md:col-span-7">
+        <TallyEmbed title="Payroll quote" />
+      </div>
+    </div>
+  </Section>
+</BaseLayout>

@@ -1,0 +1,193 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import ServiceHero from '~/components/service/ServiceHero.astro';
+import Deliverables from '~/components/service/Deliverables.astro';
+import Pricing from '~/components/service/Pricing.astro';
+import ServiceProcess from '~/components/service/ServiceProcess.astro';
+import FAQ from '~/components/home/FAQ.astro';
+import Section from '~/components/ui/Section.astro';
+import TallyEmbed from '~/components/forms/TallyEmbed.astro';
+import { SITE } from '~/site.config';
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Services', href: '/services/' },
+  { name: 'Bookkeeping', href: '/services/bookkeeping/' },
+];
+
+const deliverables = [
+  {
+    title: 'Monthly transaction coding',
+    body: 'Every bank and credit card transaction categorized to the correct account. Custom chart of accounts built for your industry so your reports actually mean something.',
+  },
+  {
+    title: 'Bank and credit card reconciliation',
+    body: 'All accounts reconciled to statement each month. Discrepancies investigated and resolved before the books close. Nothing carries forward unreconciled.',
+  },
+  {
+    title: 'Monthly financial reports',
+    body: 'Profit and loss, balance sheet, and accounts receivable aging delivered by the 10th of the following month. Formatted for quick reading, not just CRA compliance.',
+  },
+  {
+    title: 'Year-end close and handoff',
+    body: 'Clean year-end trial balance prepared for your accountant or for our own T2 filing. Accruals, prepayments, and adjusting entries done before the file is closed.',
+  },
+];
+
+const pricingTiers = [
+  {
+    name: 'Starter',
+    price: '$299',
+    unit: '/ month',
+    blurb: 'Up to 100 transactions per month. Sole props and very small corps.',
+    features: [
+      'Monthly transaction coding',
+      'Bank reconciliation',
+      'Monthly P&L and balance sheet',
+      'No setup fee',
+    ],
+  },
+  {
+    name: 'Growth',
+    price: '$549',
+    unit: '/ month',
+    blurb: 'Up to 300 transactions per month. Most small Ontario businesses.',
+    featured: true,
+    features: [
+      'Monthly transaction coding',
+      'All account reconciliations',
+      'Full financial report package',
+      'Year-end close included',
+    ],
+  },
+  {
+    name: 'Scale',
+    price: 'from $999',
+    unit: '/ month',
+    blurb: 'High-volume, multi-entity, or e-commerce with complex revenue streams.',
+    features: [
+      'Unlimited transactions',
+      'Multi-entity or multi-currency',
+      'Accounts payable support',
+      'Year-end close included',
+    ],
+  },
+];
+
+const processSteps = [
+  {
+    n: '01',
+    title: 'Connect your accounts',
+    body: 'We set up QuickBooks Online or Xero and connect your bank feeds. Existing files migrated or started fresh depending on the state of your books.',
+  },
+  {
+    n: '02',
+    title: 'Monthly close routine',
+    body: 'By the 5th of each month we request any receipts or explanations for unclear transactions. By the 10th, books are closed and reports are in your inbox.',
+  },
+  {
+    n: '03',
+    title: 'You review the reports',
+    body: 'Monthly P&L and balance sheet sent with a short plain-language commentary on anything notable. Questions answered by the next business day.',
+  },
+  {
+    n: '04',
+    title: 'Year-end ready',
+    body: 'Books handed off to our tax team or your accountant clean and adjusted. No year-end cleanup fees, no surprises when the T2 is prepared.',
+  },
+];
+
+const faqItems = [
+  {
+    q: 'Do you work in QuickBooks or Xero?',
+    a: 'Both. We have no platform preference - we use whichever your business already runs, or we help you choose if you are starting fresh. QuickBooks Online is more common among our clients, but Xero works equally well.',
+  },
+  {
+    q: 'My books are months behind. Can you catch up?',
+    a: 'Yes. Catch-up bookkeeping is quoted per month based on transaction volume. Most clients with six to twelve months of backlog are caught up within two to three weeks. We prioritize getting you current before starting the ongoing monthly service.',
+  },
+  {
+    q: 'What does "clean books" actually mean for my tax return?',
+    a: 'Clean books mean your year-end trial balance is reconciled, accounts are correctly classified, and all adjusting entries are posted. For T2 preparation this reduces the time our tax team spends on corrections, which keeps your corporate tax fee lower.',
+  },
+  {
+    q: 'Do you handle accounts payable or invoicing?',
+    a: 'Scale plan clients get accounts payable support. We code and schedule vendor payments and flag anything overdue. We do not send invoices to your customers, but we can set up automated invoicing in QuickBooks or Xero and reconcile payments as they come in.',
+  },
+  {
+    q: 'Who handles my books - a person or software?',
+    a: 'A dedicated bookkeeper handles your file. Software assists with bank feed imports and some coding suggestions, but a human reviews every transaction before the month closes.',
+  },
+  {
+    q: 'Can bookkeeping be bundled with the T2?',
+    a: 'Yes. Clients who use our bookkeeping service receive a discounted rate on the corporate T2 because our tax team works directly from the finalized books rather than starting from scratch.',
+  },
+];
+---
+
+<BaseLayout
+  title="Bookkeeping Toronto Small Business | Prisma"
+  description="Monthly bookkeeping for Toronto small businesses in QuickBooks or Xero. Transactions coded, accounts reconciled, reports by the 10th. Fixed CAD pricing."
+  path="/services/bookkeeping/"
+  schemaVariant="service"
+  breadcrumbs={breadcrumbs}
+  faqItems={faqItems}
+  service={{
+    name: 'Bookkeeping Services',
+    description:
+      'Monthly bookkeeping in QuickBooks Online and Xero for small businesses in Toronto and Ontario. Transaction coding, reconciliations, and financial reporting.',
+    serviceType: 'Bookkeeping',
+  }}
+>
+  <ServiceHero
+    eyebrow="Bookkeeping"
+    title="Bookkeeping Services for Small Business in Toronto"
+    subtitle="Monthly books closed by the 10th, financial reports in your inbox, year-end ready without the last-minute scramble. Fixed monthly CAD rate, no hourly billing."
+    breadcrumbs={breadcrumbs}
+  />
+
+  <Deliverables
+    heading="What we deliver every month"
+    intro="Every bookkeeping engagement includes all four items. No add-on fees for reconciliations or year-end."
+    items={deliverables}
+  />
+
+  <Pricing
+    heading="Flat monthly pricing"
+    intro="Based on transaction volume. Price confirmed after a quick review of your last three months of bank statements."
+    tiers={pricingTiers}
+    footnote="Prices in CAD plus HST. QuickBooks Online or Xero subscription included. Catch-up bookkeeping for prior periods quoted separately based on volume."
+  />
+
+  <ServiceProcess
+    heading="How monthly bookkeeping works"
+    intro="A predictable rhythm every month so you always know where your business stands."
+    steps={processSteps}
+  />
+
+  <FAQ
+    id="faq"
+    heading="Bookkeeping questions"
+    intro="What small business owners in Ontario ask us most about keeping clean books."
+    items={faqItems}
+  />
+
+  <Section id="quote" bg="elev" divider>
+    <div class="grid gap-10 md:grid-cols-12 items-start">
+      <div class="md:col-span-5">
+        <h2 class="text-4xl md:text-5xl font-medium tracking-tight leading-[1.1] text-balance">
+          Get a free quote
+        </h2>
+        <p class="mt-5 text-lg leading-relaxed text-[var(--color-ink-muted)] max-w-sm">
+          Tell us your approximate monthly transaction volume, what software you use (or want to use), and how many months are behind. Price back within one business day.
+        </p>
+        <p class="mt-6 text-sm text-[var(--color-ink-muted)]">
+          Prefer email? Write to <a href={`mailto:${SITE.contact.email}`} class="text-[var(--color-ink)] underline underline-offset-4 hover:text-[var(--color-accent)] transition-colors">{SITE.contact.email}</a>.
+        </p>
+      </div>
+      <div class="md:col-span-7">
+        <TallyEmbed title="Bookkeeping quote" />
+      </div>
+    </div>
+  </Section>
+</BaseLayout>

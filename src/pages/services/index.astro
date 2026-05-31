@@ -1,0 +1,170 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Section from '~/components/ui/Section.astro';
+import Reveal from '~/components/motion/Reveal.astro';
+import TallyEmbed from '~/components/forms/TallyEmbed.astro';
+import { SITE, SERVICES } from '~/site.config';
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Services', href: '/services/' },
+];
+
+const serviceDetails: Record<string, { intro: string; bullets: string[] }> = {
+  'personal-tax-t1': {
+    intro: 'T1 personal income tax returns for employees, self-employed, investors, and landlords across Ontario.',
+    bullets: ['T4, T5, T3, RRSP, rental income', 'Self-employment T2125 schedules', 'Capital gains and crypto', 'CRA NETFILE in three business days'],
+  },
+  'corporate-tax-t2': {
+    intro: 'T2 corporate income tax returns, financial statements, and CRA schedules for incorporated businesses.',
+    bullets: ['T2 return and all schedules', 'Notice-to-reader financial statements', 'Ontario CT23 where required', 'Year-end planning included'],
+  },
+  'hst-gst': {
+    intro: 'HST/GST registration, quarterly and annual filings, and input tax credit optimization for Ontario businesses.',
+    bullets: ['CRA registration and setup', 'Quarterly and annual filing', 'Input tax credit recovery', 'Voluntary disclosure support'],
+  },
+  'payroll': {
+    intro: 'Monthly payroll processing, T4 slip preparation, and CRA remittances for businesses with employees.',
+    bullets: ['Monthly pay runs', 'T4 and T4A slip filing', 'CRA payroll remittances', 'ROE preparation'],
+  },
+  'corporation-registration': {
+    intro: 'Federal or Ontario corporation setup, articles of incorporation, minute books, and CRA registration.',
+    bullets: ['Federal or provincial incorporation', 'Articles and minute book', 'CRA business number registration', 'HST and payroll account setup'],
+  },
+  'bookkeeping': {
+    intro: 'Monthly bookkeeping in QuickBooks or Xero for clean financial records and year-end readiness.',
+    bullets: ['Monthly reconciliation', 'QuickBooks or Xero', 'Real-time reports on request', 'Year-end package for accountant'],
+  },
+};
+---
+
+<BaseLayout
+  title="Accounting Services Toronto | Prisma Accounting"
+  description="Personal tax (T1), corporate tax (T2), HST/GST, payroll, bookkeeping, and incorporation for small businesses in Toronto, Ontario. Fixed CAD pricing, CRA-ready."
+  path="/services/"
+  schemaVariant="page"
+  breadcrumbs={breadcrumbs}
+>
+  <section class="relative pt-20 md:pt-24 pb-14 md:pb-20">
+    <div class="container-page">
+      <nav aria-label="Breadcrumb" class="mb-8 text-sm text-[var(--color-ink-muted)]">
+        <ol class="flex flex-wrap items-center gap-2 list-none p-0">
+          <li>
+            <a href="/" class="hover:text-[var(--color-ink)] transition-colors">Home</a>
+          </li>
+          <li aria-hidden="true" class="text-[var(--color-line)]">/</li>
+          <li class="text-[var(--color-ink)]" aria-current="page">Services</li>
+        </ol>
+      </nav>
+
+      <div class="max-w-4xl">
+        <h1 class="text-balance text-5xl md:text-6xl font-medium tracking-tight leading-[1.05] text-[var(--color-ink)]">
+          Accounting services in Toronto
+        </h1>
+        <p class="mt-7 max-w-[60ch] text-lg md:text-xl leading-relaxed text-[var(--color-ink-muted)]">
+          Six services for small businesses and self-employed in Ontario. Fixed CAD pricing confirmed before any work starts. CRA-ready filings, reviewed by a CPA before submission.
+        </p>
+        <div class="mt-10 flex flex-wrap gap-3">
+          {[
+            'Fixed CAD pricing',
+            'CPA-reviewed filings',
+            'CRA-authorized filer',
+            'Toronto and Ontario',
+          ].map((badge) => (
+            <span class="text-sm font-medium px-4 py-2 rounded-full border border-[var(--color-line)] text-[var(--color-ink-muted)]">
+              {badge}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Section divider>
+    <Reveal as="ul" class="grid grid-cols-1 md:grid-cols-2 gap-6 list-none p-0">
+      {SERVICES.map((svc) => {
+        const detail = serviceDetails[svc.slug];
+        return (
+          <li>
+            <a
+              href={svc.href}
+              class="group flex flex-col h-full rounded-2xl border border-[var(--color-line)] bg-[var(--color-bg-elev)] p-8 hover:border-[var(--color-accent)]/40 transition-colors"
+            >
+              <div class="flex items-start justify-between gap-4 mb-4">
+                <h2 class="text-2xl font-medium tracking-tight group-hover:text-[var(--color-accent)] transition-colors">
+                  {svc.title}
+                </h2>
+                <svg
+                  class="mt-1 shrink-0 transition-transform group-hover:translate-x-1"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+              <p class="text-[var(--color-ink-muted)] leading-relaxed mb-6 flex-1">
+                {detail?.intro ?? svc.oneLiner}
+              </p>
+              {detail && (
+                <ul class="space-y-2">
+                  {detail.bullets.map((b) => (
+                    <li class="flex items-start gap-3 text-sm text-[var(--color-ink-muted)]">
+                      <span class="mt-[3px] shrink-0 w-4 h-4 rounded-full bg-[var(--color-accent)]/10 flex items-center justify-center">
+                        <svg width="8" height="8" viewBox="0 0 8 8" fill="none" aria-hidden="true">
+                          <path d="M1.5 4l1.5 1.5L6.5 2.5" stroke="var(--color-accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </span>
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </a>
+          </li>
+        );
+      })}
+    </Reveal>
+  </Section>
+
+  <Section bg="elev" divider>
+    <div class="grid gap-12 md:grid-cols-12 items-start">
+      <div class="md:col-span-5">
+        <h2 class="text-4xl md:text-5xl font-medium tracking-tight leading-[1.1] text-balance">
+          Fixed price before any work starts
+        </h2>
+        <p class="mt-5 text-lg leading-relaxed text-[var(--color-ink-muted)] max-w-[48ch]">
+          Tell us what you need. We send a written CAD quote within one business day - no hourly billing, no estimates.
+        </p>
+        <ul class="mt-8 space-y-4">
+          {[
+            { n: '01', text: 'Send a short note about your situation' },
+            { n: '02', text: 'Receive a fixed CAD price in writing' },
+            { n: '03', text: 'Accept the quote and we start - or decline at no charge' },
+          ].map(({ n, text }) => (
+            <li class="flex items-start gap-4">
+              <span class="font-mono text-sm text-[var(--color-ink-muted)] shrink-0 mt-0.5 w-6">{n}</span>
+              <p class="text-[var(--color-ink-muted)] leading-relaxed">{text}</p>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-8 text-sm text-[var(--color-ink-muted)]">
+          Prefer email? Write to{' '}
+          <a
+            href={`mailto:${SITE.contact.email}`}
+            class="text-[var(--color-ink)] underline underline-offset-4 hover:text-[var(--color-accent)] transition-colors"
+          >
+            {SITE.contact.email}
+          </a>
+        </p>
+      </div>
+      <div class="md:col-span-7">
+        <TallyEmbed title="Services quote" />
+      </div>
+    </div>
+  </Section>
+</BaseLayout>

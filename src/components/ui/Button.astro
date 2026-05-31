@@ -1,0 +1,48 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'inverted';
+  size?: 'md' | 'lg';
+  type?: 'button' | 'submit';
+  class?: string;
+  ariaLabel?: string;
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  type = 'button',
+  class: extraClass = '',
+  ariaLabel,
+} = Astro.props;
+
+const base =
+  'inline-flex items-center justify-center font-medium rounded-full transition active:translate-y-px focus-visible:outline-none';
+const sizes = {
+  md: 'px-6 py-3 text-base',
+  lg: 'px-7 py-4 text-base',
+};
+const variants = {
+  primary:
+    'bg-[var(--color-accent)] text-[var(--color-bg-elev)] hover:bg-[var(--color-accent-hi)]',
+  secondary:
+    'border border-[var(--color-ink)]/15 text-[var(--color-ink)] hover:border-[var(--color-ink)]/40',
+  inverted:
+    'bg-[var(--color-bg-elev)] text-[var(--color-ink)] hover:bg-[var(--color-line)]',
+};
+
+const cls = `${base} ${sizes[size]} ${variants[variant]} ${extraClass}`.trim();
+---
+
+{
+  href ? (
+    <a href={href} class={cls} aria-label={ariaLabel}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class={cls} aria-label={ariaLabel}>
+      <slot />
+    </button>
+  )
+}

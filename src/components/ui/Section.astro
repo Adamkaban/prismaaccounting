@@ -1,0 +1,29 @@
+---
+interface Props {
+  id?: string;
+  as?: 'section' | 'header' | 'footer' | 'div';
+  bg?: 'bg' | 'elev';
+  divider?: boolean;
+  class?: string;
+}
+
+const {
+  id,
+  as: Tag = 'section',
+  bg = 'bg',
+  divider = false,
+  class: extraClass = '',
+} = Astro.props;
+
+const bgClass = bg === 'elev' ? 'bg-[var(--color-bg-elev)]' : '';
+const dividerClass = divider ? 'border-t border-[var(--color-line)]' : '';
+---
+
+<Tag
+  id={id}
+  class={`relative py-20 md:py-32 ${bgClass} ${dividerClass} ${extraClass}`.trim()}
+>
+  <div class="container-page">
+    <slot />
+  </div>
+</Tag>

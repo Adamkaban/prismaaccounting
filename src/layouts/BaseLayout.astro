@@ -1,0 +1,104 @@
+---
+import '@fontsource-variable/geist';
+import '@fontsource-variable/geist-mono';
+import '~/styles/global.css';
+
+import { SITE } from '~/site.config';
+import Meta from '~/components/seo/Meta.astro';
+import SchemaOrg from '~/components/seo/SchemaOrg.astro';
+import Header from '~/components/nav/Header.astro';
+import Footer from '~/components/nav/Footer.astro';
+
+interface BreadcrumbItem {
+  name: string;
+  href: string;
+}
+
+interface ServiceMeta {
+  name: string;
+  description: string;
+  serviceType: string;
+}
+
+interface FAQItem {
+  q: string;
+  a: string;
+}
+
+interface ArticleMeta {
+  headline: string;
+  description: string;
+  datePublished: string;
+  dateModified?: string;
+  author?: string;
+  image?: string;
+  url: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  noindex?: boolean;
+  ogImage?: string;
+  ogType?: string;
+  schemaVariant?: 'home' | 'page' | 'service' | 'article';
+  breadcrumbs?: BreadcrumbItem[];
+  service?: ServiceMeta;
+  faqItems?: FAQItem[];
+  article?: ArticleMeta;
+}
+
+const {
+  title,
+  description,
+  path,
+  noindex,
+  ogImage,
+  ogType,
+  schemaVariant = 'page',
+  breadcrumbs,
+  service,
+  faqItems,
+  article,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={SITE.locale} dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#0F4D3A" />
+
+    <Meta
+      title={title}
+      description={description}
+      path={path}
+      noindex={noindex}
+      ogImage={ogImage}
+      ogType={ogType}
+    />
+    <SchemaOrg variant={schemaVariant} breadcrumbs={breadcrumbs} service={service} faqItems={faqItems} article={article} />
+  </head>
+  <body class="bg-[var(--color-bg)] text-[var(--color-ink)] font-sans">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[var(--color-ink)] focus:text-[var(--color-bg-elev)] focus:rounded-full"
+    >
+      Skip to content
+    </a>
+
+    <Header />
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
+</html>
