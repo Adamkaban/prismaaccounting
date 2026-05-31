@@ -9,7 +9,11 @@
 ## Technical
 - robots.txt: index,follow (default)
 - sitemap.xml: all pages included
-- Redirects: www + http → https
+- Redirects: managed in CF Dashboard, NOT in code
+  - www→non-www: CF Dashboard → Rules → Redirect Rules → "Redirect from WWW to root"
+  - http→https: CF Dashboard → SSL/TLS → Always Use HTTPS
+  - Never put absolute URLs in `public/_redirects` — Workers Assets rejects them
+  - `public/_redirects` for relative redirects only (e.g. `/old-page /new-page 301`)
 - PageSpeed target: 90+
 
 ## Images
