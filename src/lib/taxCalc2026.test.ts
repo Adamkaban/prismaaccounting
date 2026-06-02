@@ -2,6 +2,8 @@ import { describe, it, expect } from 'vitest';
 import {
   applyBrackets,
   ontarioSurtax,
+  calculateCPP,
+  calculateEI,
   FEDERAL_BRACKETS_2026,
   ONTARIO_BRACKETS_2026,
 } from './taxCalc2026';
@@ -50,5 +52,56 @@ describe('ontarioSurtax', () => {
     // tier 1: ($8,000 - $5,315) × 20% = $537
     // tier 2: ($8,000 - $6,802) × 36% = $431.28
     expect(ontarioSurtax(8_000)).toBeCloseTo(968, 0);
+  });
+});
+
+describe('calculateCPP', () => {
+  it('returns 0 for income at or below exemption ($3,500)', () => {
+    expect(calculateCPP(3_500).employee).toBe(0);
+    expect(calculateCPP(1_000).employee).toBe(0);
+  });
+
+  it('calculates CPP1 only for $50,000', () => {
+    // ($50,000 - $3,500) × 5.95% = $2,766.75
+    expect(calculateCPP(50_000).employee).toBeCloseTo(2_766.75, 1);
+  });
+
+  it('CPP1 maxes out at $68,500 ceiling', () => {
+    const atCeiling = calculateCPP(68_500).employee;
+    const above = calculateCPP(200_000).employee;
+    // CPP1 portion is the same; only CPP2 differs
+    const cpp1Max = (68_500 - 3_500) * 0.0595; // $3,867.50
+    expect(atCeiling).toBeCloseTo(cpp1Max, 1);
+    expect(above).toBeGreaterThan(cpp1Max); // adds CPP2
+  });
+
+  it('calculates CPP2 for income above first ceiling', () => {
+    // income $73,200: CPP1 max + CPP2 max
+    // CPP1: 65000 × 5.95% = $3,867.50
+    // CPP2: (73200 - 68500) × 4% = $188
+    expect(calculateCPP(73_200).employee).toBeCloseTo(4_055.50, 1);
+  });
+
+  it('employer equals employee', () => {
+    const r = calculateCPP(80_000);
+    expect(r.employer).toBeCloseTo(r.employee, 5);
+  });
+});
+
+describe('calculateEI', () => {
+  it('calculates EI for $50,000', () => {
+    // $50,000 × 1.66% = $830
+    expect(calculateEI(50_000).employee).toBeCloseTo(830, 0);
+  });
+
+  it('caps at max insurable earnings ($63,200)', () => {
+    // $63,200 × 1.66% = $1,049.12
+    expect(calculateEI(100_000).employee).toBeCloseTo(1_049.12, 1);
+    expect(calculateEI(63_200).employee).toBeCloseTo(1_049.12, 1);
+  });
+
+  it('employer is 1.4× employee', () => {
+    const r = calculateEI(50_000);
+    expect(r.employer).toBeCloseTo(r.employee * 1.4, 5);
   });
 });

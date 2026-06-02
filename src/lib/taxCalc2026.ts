@@ -59,3 +59,31 @@ export function ontarioSurtax(basicOntarioTax: number): number {
   }
   return surtax;
 }
+
+const CPP_2026 = {
+  exemption: 3_500,
+  cpp1Rate: 0.0595,
+  cpp1MaxEarnings: 68_500, // (* 2026 *)
+  cpp2Rate: 0.04,
+  cpp2MaxEarnings: 73_200, // (* 2026 *)
+};
+
+const EI_2026 = {
+  employeeRate: 0.0166,         // (* 2026 *)
+  maxInsurableEarnings: 63_200, // (* 2026 *)
+  employerMultiplier: 1.4,
+};
+
+export function calculateCPP(salary: number): { employee: number; employer: number } {
+  const { exemption, cpp1Rate, cpp1MaxEarnings, cpp2Rate, cpp2MaxEarnings } = CPP_2026;
+  const cpp1 = Math.min(Math.max(salary - exemption, 0), cpp1MaxEarnings - exemption) * cpp1Rate;
+  const cpp2 = Math.max(Math.min(salary, cpp2MaxEarnings) - cpp1MaxEarnings, 0) * cpp2Rate;
+  const employee = cpp1 + cpp2;
+  return { employee, employer: employee };
+}
+
+export function calculateEI(salary: number): { employee: number; employer: number } {
+  const { employeeRate, maxInsurableEarnings, employerMultiplier } = EI_2026;
+  const employee = Math.min(salary, maxInsurableEarnings) * employeeRate;
+  return { employee, employer: employee * employerMultiplier };
+}
