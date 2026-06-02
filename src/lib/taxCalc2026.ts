@@ -87,3 +87,118 @@ export function calculateEI(salary: number): { employee: number; employer: numbe
   const employee = Math.min(Math.max(salary, 0), maxInsurableEarnings) * employeeRate;
   return { employee, employer: employee * employerMultiplier };
 }
+
+const CORP_2026 = {
+  ontarioSBR: 0.122, // Federal 9% + Ontario 3.2%
+};
+
+const OTE_2026 = {
+  grossUp: 0.15,
+  federalDTC: 0.090301,  // % of grossed-up amount
+  ontarioDTC: 0.032863,  // % of grossed-up amount
+};
+
+function personalTaxOnSalary(
+  salary: number,
+  empCPP: number,
+  empEI: number,
+): { federal: number; ontario: number } {
+  const fedBPA = BPA_2026.federal * 0.15;
+  const onBPA = BPA_2026.ontario * 0.0505;
+
+  const federalBasic = applyBrackets(salary, FEDERAL_BRACKETS_2026);
+  const federal = Math.max(
+    federalBasic - fedBPA - empCPP * 0.15 - empEI * 0.15,
+    0,
+  );
+
+  const ontarioBasic = applyBrackets(salary, ONTARIO_BRACKETS_2026);
+  const ontario = Math.max(
+    ontarioBasic + ontarioSurtax(ontarioBasic) - onBPA - empCPP * 0.0505 - empEI * 0.0505,
+    0,
+  );
+
+  return { federal, ontario };
+}
+
+function personalTaxOnDividend(dividend: number): { federal: number; ontario: number } {
+  const grossed = dividend * (1 + OTE_2026.grossUp);
+  const fedBPA = BPA_2026.federal * 0.15;
+  const onBPA = BPA_2026.ontario * 0.0505;
+
+  const federalBasic = applyBrackets(grossed, FEDERAL_BRACKETS_2026);
+  const federal = Math.max(federalBasic - fedBPA - grossed * OTE_2026.federalDTC, 0);
+
+  const ontarioBasic = applyBrackets(grossed, ONTARIO_BRACKETS_2026);
+  const ontario = Math.max(
+    ontarioBasic + ontarioSurtax(ontarioBasic) - onBPA - grossed * OTE_2026.ontarioDTC,
+    0,
+  );
+
+  return { federal, ontario };
+}
+
+export interface SalaryResult {
+  netTakehome: number;
+  corpTax: number;
+  personalTax: number;
+  employeeCPP: number;
+  employeeEI: number;
+  totalTax: number;
+  effectiveRate: number;
+}
+
+export interface DividendResult {
+  netTakehome: number;
+  corpTax: number;
+  personalTax: number;
+  totalTax: number;
+  effectiveRate: number;
+  warning?: string;
+}
+
+export function calcSalary(corpProfit: number, salary: number): SalaryResult {
+  const cpp = calculateCPP(salary);
+  const ei = calculateEI(salary);
+  const corpSalaryCost = salary + cpp.employer + ei.employer;
+  const remaining = Math.max(corpProfit - corpSalaryCost, 0);
+  const corpTax = remaining * CORP_2026.ontarioSBR;
+  const pt = personalTaxOnSalary(salary, cpp.employee, ei.employee);
+  const personalTax = pt.federal + pt.ontario;
+  const totalTax =
+    corpTax + personalTax + cpp.employee + cpp.employer + ei.employee + ei.employer;
+  return {
+    netTakehome: salary - personalTax - cpp.employee - ei.employee,
+    corpTax,
+    personalTax,
+    employeeCPP: cpp.employee,
+    employeeEI: ei.employee,
+    totalTax,
+    effectiveRate: totalTax / corpProfit,
+  };
+}
+
+export function calcDividend(corpProfit: number, dividend: number): DividendResult {
+  const corpTax = corpProfit * CORP_2026.ontarioSBR;
+  const afterTaxPool = corpProfit - corpTax;
+  if (dividend > afterTaxPool) {
+    return {
+      netTakehome: 0,
+      corpTax,
+      personalTax: 0,
+      totalTax: 0,
+      effectiveRate: 0,
+      warning: `Dividend $${Math.round(dividend).toLocaleString('en-CA')} exceeds after-tax pool $${Math.round(afterTaxPool).toLocaleString('en-CA')}. Reduce desired income.`,
+    };
+  }
+  const pt = personalTaxOnDividend(dividend);
+  const personalTax = pt.federal + pt.ontario;
+  const totalTax = corpTax + personalTax;
+  return {
+    netTakehome: dividend - personalTax,
+    corpTax,
+    personalTax,
+    totalTax,
+    effectiveRate: totalTax / corpProfit,
+  };
+}

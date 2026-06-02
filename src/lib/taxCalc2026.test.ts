@@ -4,6 +4,8 @@ import {
   ontarioSurtax,
   calculateCPP,
   calculateEI,
+  calcSalary,
+  calcDividend,
   FEDERAL_BRACKETS_2026,
   ONTARIO_BRACKETS_2026,
 } from './taxCalc2026';
@@ -103,5 +105,76 @@ describe('calculateEI', () => {
   it('employer is 1.4× employee', () => {
     const r = calculateEI(50_000);
     expect(r.employer).toBeCloseTo(r.employee * 1.4, 5);
+  });
+});
+
+describe('calcSalary', () => {
+  it('net takehome is less than gross salary', () => {
+    const r = calcSalary(200_000, 80_000);
+    expect(r.netTakehome).toBeLessThan(80_000);
+    expect(r.netTakehome).toBeGreaterThan(0);
+  });
+
+  it('corp tax is 0 when salary cost exceeds corp profit', () => {
+    // Salary of $100K from $100K corp: employer costs push total corp cost above profit
+    const r = calcSalary(100_000, 100_000);
+    expect(r.corpTax).toBe(0);
+  });
+
+  it('total tax is positive and less than corp profit', () => {
+    const r = calcSalary(150_000, 80_000);
+    expect(r.totalTax).toBeGreaterThan(0);
+    expect(r.totalTax).toBeLessThan(150_000);
+  });
+
+  it('effective rate is between 0 and 1', () => {
+    const r = calcSalary(150_000, 80_000);
+    expect(r.effectiveRate).toBeGreaterThan(0);
+    expect(r.effectiveRate).toBeLessThan(1);
+  });
+
+  it('employeeCPP and employeeEI are positive for typical salary', () => {
+    const r = calcSalary(150_000, 80_000);
+    expect(r.employeeCPP).toBeGreaterThan(0);
+    expect(r.employeeEI).toBeGreaterThan(0);
+  });
+
+  it('salary $80K from $150K corp: approximate net takehome ~$60K', () => {
+    // Rough sanity: after ~25% combined personal taxes and CPP/EI, ~$60K net
+    const r = calcSalary(150_000, 80_000);
+    expect(r.netTakehome).toBeGreaterThan(55_000);
+    expect(r.netTakehome).toBeLessThan(65_000);
+  });
+});
+
+describe('calcDividend', () => {
+  it('returns warning when dividend exceeds after-tax pool', () => {
+    // $100K profit → corp tax $12,200 → after-tax pool $87,800
+    // Dividend $100K > $87,800 → warning
+    const r = calcDividend(100_000, 100_000);
+    expect(r.warning).toBeDefined();
+    expect(r.netTakehome).toBe(0);
+  });
+
+  it('no warning when dividend fits in after-tax pool', () => {
+    const r = calcDividend(100_000, 50_000);
+    expect(r.warning).toBeUndefined();
+    expect(r.netTakehome).toBeGreaterThan(0);
+  });
+
+  it('net takehome is less than dividend', () => {
+    const r = calcDividend(200_000, 80_000);
+    expect(r.netTakehome).toBeLessThan(80_000);
+  });
+
+  it('corp tax equals corpProfit × 12.2%', () => {
+    const r = calcDividend(200_000, 80_000);
+    expect(r.corpTax).toBeCloseTo(200_000 * 0.122, 0);
+  });
+
+  it('effective rate is between 0 and 1', () => {
+    const r = calcDividend(200_000, 80_000);
+    expect(r.effectiveRate).toBeGreaterThan(0);
+    expect(r.effectiveRate).toBeLessThan(1);
   });
 });
