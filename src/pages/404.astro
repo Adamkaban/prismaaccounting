@@ -1,0 +1,29 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Page Not Found | Prisma Accounting"
+  description="The page you are looking for does not exist. Return to Prisma Accounting homepage."
+  path="/404/"
+  noindex={true}
+  schemaVariant="page"
+>
+  <section class="min-h-[100dvh] flex items-center justify-center px-6">
+    <div class="max-w-[480px] text-center">
+      <p class="font-mono text-[var(--color-ink-muted)] text-sm tracking-widest uppercase mb-6">404</p>
+      <h1 class="text-4xl md:text-5xl font-medium tracking-tight leading-[1.05] text-[var(--color-ink)] mb-4">
+        Page not found
+      </h1>
+      <p class="text-lg leading-relaxed text-[var(--color-ink-muted)] max-w-[58ch] mx-auto mb-10">
+        The page you are looking for may have moved or no longer exists.
+      </p>
+      <a
+        href="/"
+        class="inline-block bg-[var(--color-accent)] text-[var(--color-bg-elev)] px-6 py-3 rounded-full font-medium hover:bg-[var(--color-accent-hi)] transition-colors duration-200 active:translate-y-[1px]"
+      >
+        Back to home
+      </a>
+    </div>
+  </section>
+</BaseLayout>
