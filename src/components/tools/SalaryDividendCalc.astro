@@ -1,0 +1,254 @@
+---
+// No props - fully self-contained interactive island
+---
+
+<div class="py-20 md:py-32">
+  <div class="container-page">
+
+    <!-- Inputs -->
+    <div class="max-w-2xl mb-12 space-y-8">
+
+      <div>
+        <div class="flex items-center justify-between mb-3">
+          <label for="corp-profit-slider" class="text-sm font-medium">
+            Corporate profit before owner compensation
+          </label>
+          <span id="corp-profit-display" class="text-sm font-mono text-[var(--color-accent)] tabular-nums">$150,000</span>
+        </div>
+        <input
+          type="range"
+          id="corp-profit-slider"
+          min="30000"
+          max="500000"
+          step="5000"
+          value="150000"
+          class="w-full cursor-pointer"
+          style="accent-color: var(--color-accent)"
+          aria-label="Corporate profit"
+        />
+        <div class="flex justify-between mt-1.5 text-xs text-[var(--color-ink-muted)] font-mono">
+          <span>$30K</span><span>$500K</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="flex items-center justify-between mb-3">
+          <label for="desired-income-slider" class="text-sm font-medium">
+            Desired personal income
+          </label>
+          <span id="desired-income-display" class="text-sm font-mono text-[var(--color-accent)] tabular-nums">$80,000</span>
+        </div>
+        <input
+          type="range"
+          id="desired-income-slider"
+          min="30000"
+          max="250000"
+          step="5000"
+          value="80000"
+          class="w-full cursor-pointer"
+          style="accent-color: var(--color-accent)"
+          aria-label="Desired personal income"
+        />
+        <div class="flex justify-between mt-1.5 text-xs text-[var(--color-ink-muted)] font-mono">
+          <span>$30K</span><span>$250K</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Results grid -->
+    <div class="grid gap-6 md:grid-cols-2">
+
+      <!-- Salary card -->
+      <div
+        id="sal-card"
+        class="relative rounded-2xl border bg-[var(--color-bg-elev)] p-8 transition-[border-color] duration-200"
+        style="border-color: var(--color-line)"
+      >
+        <span
+          id="sal-winner"
+          hidden
+          class="absolute top-5 right-5 text-xs font-medium px-3 py-1 rounded-full"
+          style="background: var(--color-accent); color: var(--color-bg-elev)"
+        >Lower tax</span>
+
+        <h3 class="text-xs font-medium uppercase tracking-widest text-[var(--color-ink-muted)] mb-6">Salary</h3>
+
+        <p id="sal-warning" hidden class="text-sm mb-4" style="color: var(--color-warn)"></p>
+
+        <div class="mb-7">
+          <div class="text-xs text-[var(--color-ink-muted)] mb-1">Net take-home</div>
+          <div id="sal-takehome" class="text-4xl font-medium font-mono tracking-tight">--</div>
+        </div>
+
+        <dl class="space-y-3">
+          <div class="flex justify-between text-sm">
+            <dt class="text-[var(--color-ink-muted)]">Corporate tax</dt>
+            <dd id="sal-corp-tax" class="font-mono">--</dd>
+          </div>
+          <div class="flex justify-between text-sm">
+            <dt class="text-[var(--color-ink-muted)]">Personal income tax</dt>
+            <dd id="sal-personal-tax" class="font-mono">--</dd>
+          </div>
+          <div class="flex justify-between text-sm">
+            <dt class="text-[var(--color-ink-muted)]">CPP (employee)</dt>
+            <dd id="sal-cpp" class="font-mono">--</dd>
+          </div>
+          <div class="flex justify-between text-sm">
+            <dt class="text-[var(--color-ink-muted)]">EI (employee)</dt>
+            <dd id="sal-ei" class="font-mono">--</dd>
+          </div>
+          <div class="flex justify-between text-sm font-medium pt-3" style="border-top: 1px solid var(--color-line)">
+            <dt>Total tax burden</dt>
+            <dd id="sal-total-tax" class="font-mono">--</dd>
+          </div>
+          <div class="flex justify-between text-sm">
+            <dt class="text-[var(--color-ink-muted)]">Effective rate</dt>
+            <dd id="sal-eff-rate" class="font-mono text-[var(--color-ink-muted)]">--</dd>
+          </div>
+        </dl>
+      </div>
+
+      <!-- Dividend card -->
+      <div
+        id="div-card"
+        class="relative rounded-2xl border bg-[var(--color-bg-elev)] p-8 transition-[border-color] duration-200"
+        style="border-color: var(--color-line)"
+      >
+        <span
+          id="div-winner"
+          hidden
+          class="absolute top-5 right-5 text-xs font-medium px-3 py-1 rounded-full"
+          style="background: var(--color-accent); color: var(--color-bg-elev)"
+        >Lower tax</span>
+
+        <h3 class="text-xs font-medium uppercase tracking-widest text-[var(--color-ink-muted)] mb-6">Dividends</h3>
+
+        <p id="div-warning" hidden class="text-sm mb-4" style="color: var(--color-warn)"></p>
+
+        <div id="div-results">
+          <div class="mb-7">
+            <div class="text-xs text-[var(--color-ink-muted)] mb-1">Net take-home</div>
+            <div id="div-takehome" class="text-4xl font-medium font-mono tracking-tight">--</div>
+          </div>
+
+          <dl class="space-y-3">
+            <div class="flex justify-between text-sm">
+              <dt class="text-[var(--color-ink-muted)]">Corporate tax</dt>
+              <dd id="div-corp-tax" class="font-mono">--</dd>
+            </div>
+            <div class="flex justify-between text-sm">
+              <dt class="text-[var(--color-ink-muted)]">Personal income tax</dt>
+              <dd id="div-personal-tax" class="font-mono">--</dd>
+            </div>
+            <div class="flex justify-between text-sm">
+              <dt class="text-[var(--color-ink-muted)]">CPP</dt>
+              <dd class="font-mono text-[var(--color-ink-muted)]">-</dd>
+            </div>
+            <div class="flex justify-between text-sm">
+              <dt class="text-[var(--color-ink-muted)]">EI</dt>
+              <dd class="font-mono text-[var(--color-ink-muted)]">-</dd>
+            </div>
+            <div class="flex justify-between text-sm font-medium pt-3" style="border-top: 1px solid var(--color-line)">
+              <dt>Total tax burden</dt>
+              <dd id="div-total-tax" class="font-mono">--</dd>
+            </div>
+            <div class="flex justify-between text-sm">
+              <dt class="text-[var(--color-ink-muted)]">Effective rate</dt>
+              <dd id="div-eff-rate" class="font-mono text-[var(--color-ink-muted)]">--</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Disclaimer -->
+    <p class="mt-8 text-sm text-[var(--color-ink-muted)] max-w-2xl leading-relaxed">
+      Estimates use 2026 federal and Ontario rates. Assumes single income source, Ontario resident, no other credits or deductions. Employer CPP and EI included in total tax burden. Not tax advice - consult a CPA for your situation.
+    </p>
+
+  </div>
+</div>
+
+<script>
+  import { calcSalary, calcDividend } from '~/lib/taxCalc2026';
+
+  const cad = new Intl.NumberFormat('en-CA', {
+    style: 'currency',
+    currency: 'CAD',
+    maximumFractionDigits: 0,
+  });
+  const fmt = (n: number) => cad.format(n);
+  const fmtPct = (n: number) => `${(n * 100).toFixed(1)}%`;
+
+  function el<T extends HTMLElement = HTMLElement>(id: string): T {
+    return document.getElementById(id) as T;
+  }
+
+  function update(): void {
+    const corpProfit = Number(el<HTMLInputElement>('corp-profit-slider').value);
+    const desiredRaw = Number(el<HTMLInputElement>('desired-income-slider').value);
+    const desired = Math.min(desiredRaw, corpProfit);
+
+    // Clamp desired slider if it exceeds corp profit
+    if (desiredRaw > corpProfit) {
+      el<HTMLInputElement>('desired-income-slider').value = String(corpProfit);
+    }
+
+    el('corp-profit-display').textContent = fmt(corpProfit);
+    el('desired-income-display').textContent = fmt(desired);
+
+    const sal = calcSalary(corpProfit, desired);
+    const div = calcDividend(corpProfit, desired);
+
+    // Salary card
+    const salWarning = el('sal-warning');
+    if (sal.warning) {
+      salWarning.textContent = sal.warning;
+      salWarning.hidden = false;
+    } else {
+      salWarning.hidden = true;
+    }
+    el('sal-takehome').textContent = fmt(sal.netTakehome);
+    el('sal-corp-tax').textContent = fmt(sal.corpTax);
+    el('sal-personal-tax').textContent = fmt(sal.personalTax);
+    el('sal-cpp').textContent = fmt(sal.employeeCPP);
+    el('sal-ei').textContent = fmt(sal.employeeEI);
+    el('sal-total-tax').textContent = fmt(sal.totalTax);
+    el('sal-eff-rate').textContent = fmtPct(sal.effectiveRate);
+
+    // Dividend card
+    const divWarning = el('div-warning');
+    const divResults = el('div-results');
+
+    if (div.warning) {
+      divWarning.textContent = div.warning;
+      divWarning.hidden = false;
+      divResults.hidden = true;
+      el('sal-winner').hidden = true;
+      el('div-winner').hidden = true;
+      el('sal-card').style.borderColor = 'var(--color-line)';
+      el('div-card').style.borderColor = 'var(--color-line)';
+      return;
+    }
+
+    divWarning.hidden = true;
+    divResults.hidden = false;
+    el('div-takehome').textContent = fmt(div.netTakehome);
+    el('div-corp-tax').textContent = fmt(div.corpTax);
+    el('div-personal-tax').textContent = fmt(div.personalTax);
+    el('div-total-tax').textContent = fmt(div.totalTax);
+    el('div-eff-rate').textContent = fmtPct(div.effectiveRate);
+
+    const salWins = sal.totalTax <= div.totalTax;
+    el('sal-winner').hidden = !salWins;
+    el('div-winner').hidden = salWins;
+    el('sal-card').style.borderColor = salWins ? 'var(--color-accent)' : 'var(--color-line)';
+    el('div-card').style.borderColor = salWins ? 'var(--color-line)' : 'var(--color-accent)';
+  }
+
+  el<HTMLInputElement>('corp-profit-slider').addEventListener('input', update);
+  el<HTMLInputElement>('desired-income-slider').addEventListener('input', update);
+  update();
+</script>
