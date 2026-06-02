@@ -145,6 +145,13 @@ describe('calcSalary', () => {
     expect(r.netTakehome).toBeGreaterThan(55_000);
     expect(r.netTakehome).toBeLessThan(65_000);
   });
+
+  it('salary $80K from $150K corp: exact tax breakdown', () => {
+    const r = calcSalary(150_000, 80_000);
+    expect(r.netTakehome).toBeCloseTo(60_445, -1);
+    expect(r.corpTax).toBeGreaterThan(0);
+    expect(r.personalTax).toBeGreaterThan(0);
+  });
 });
 
 describe('calcDividend', () => {
@@ -176,5 +183,12 @@ describe('calcDividend', () => {
     const r = calcDividend(200_000, 80_000);
     expect(r.effectiveRate).toBeGreaterThan(0);
     expect(r.effectiveRate).toBeLessThan(1);
+  });
+
+  it('warning path: totalTax equals corpTax, effectiveRate ~12.2%', () => {
+    const r = calcDividend(100_000, 100_000);
+    expect(r.corpTax).toBeCloseTo(12_200, 0);
+    expect(r.totalTax).toBeCloseTo(r.corpTax, 5);
+    expect(r.effectiveRate).toBeCloseTo(0.122, 3);
   });
 });

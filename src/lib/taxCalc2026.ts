@@ -146,6 +146,7 @@ export interface SalaryResult {
   employeeEI: number;
   totalTax: number;
   effectiveRate: number;
+  warning?: string;
 }
 
 export interface DividendResult {
@@ -167,6 +168,9 @@ export function calcSalary(corpProfit: number, salary: number): SalaryResult {
   const personalTax = pt.federal + pt.ontario;
   const totalTax =
     corpTax + personalTax + cpp.employee + cpp.employer + ei.employee + ei.employer;
+  const warning = corpSalaryCost > corpProfit
+    ? `Salary cost $${Math.round(corpSalaryCost).toLocaleString('en-CA')} (including employer CPP/EI) exceeds corporate profit $${Math.round(corpProfit).toLocaleString('en-CA')}.`
+    : undefined;
   return {
     netTakehome: salary - personalTax - cpp.employee - ei.employee,
     corpTax,
@@ -174,7 +178,8 @@ export function calcSalary(corpProfit: number, salary: number): SalaryResult {
     employeeCPP: cpp.employee,
     employeeEI: ei.employee,
     totalTax,
-    effectiveRate: totalTax / corpProfit,
+    effectiveRate: corpProfit > 0 ? totalTax / corpProfit : 0,
+    warning,
   };
 }
 
@@ -186,8 +191,8 @@ export function calcDividend(corpProfit: number, dividend: number): DividendResu
       netTakehome: 0,
       corpTax,
       personalTax: 0,
-      totalTax: 0,
-      effectiveRate: 0,
+      totalTax: corpTax,
+      effectiveRate: corpProfit > 0 ? corpTax / corpProfit : 0,
       warning: `Dividend $${Math.round(dividend).toLocaleString('en-CA')} exceeds after-tax pool $${Math.round(afterTaxPool).toLocaleString('en-CA')}. Reduce desired income.`,
     };
   }
@@ -199,6 +204,6 @@ export function calcDividend(corpProfit: number, dividend: number): DividendResu
     corpTax,
     personalTax,
     totalTax,
-    effectiveRate: totalTax / corpProfit,
+    effectiveRate: corpProfit > 0 ? totalTax / corpProfit : 0,
   };
 }
