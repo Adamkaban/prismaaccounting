@@ -1,6 +1,6 @@
 export const SITE = {
-  name: 'Prisma Accounting',
-  legalName: 'Prisma Accounting',
+  name: 'Prisma Financial',
+  legalName: 'Prisma Financial',
   url: 'https://prismaaccounting.com',
   defaultTitle: 'Toronto Accounting & Tax Help',
   defaultDescription:
