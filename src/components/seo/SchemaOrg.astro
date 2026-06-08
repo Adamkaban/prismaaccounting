@@ -139,9 +139,9 @@ const articleNode = article
       ...(article.dateModified ? { dateModified: article.dateModified } : {}),
       ...(article.image ? { image: new URL(article.image, orgUrl).toString() } : {}),
       author: {
-        '@type': 'Organization',
+        '@type': 'Person',
         name: article.author ?? SITE.name,
-        url: orgUrl,
+        url: `${orgUrl}/about/`,
       },
       publisher: { '@id': `${orgUrl}/#organization` },
       inLanguage: 'en-CA',
