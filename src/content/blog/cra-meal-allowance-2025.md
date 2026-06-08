@@ -59,6 +59,8 @@ In this case the detailed method wins. Run the comparison when your actual costs
 
 ## How to Claim Meal Expenses on Your T1 (Self-Employed)
 
+Filing a [T1 personal tax return](/services/personal-tax-t1/) in Toronto? Here is how to handle meal expenses correctly.
+
 1. Complete **Form T2125** with your total meal expenses for the year in the "Meals and entertainment" line.
 2. Apply the 50% limit before entering the deductible amount.
 3. Keep a travel log with dates, destinations, and business purposes for each trip where meals are claimed. CRA requires this on audit.
@@ -66,7 +68,7 @@ In this case the detailed method wins. Run the comparison when your actual costs
 
 ## How to Claim Meal Expenses on Your T2 (Corporation)
 
-Corporations claim meals and entertainment as a business expense on the T2, subject to the same 50% limitation. The expense reduces net income before calculating the small business deduction or general rate reduction.
+When preparing a [corporate T2 return](/services/corporate-tax-t2/), corporations claim meals and entertainment as a business expense on the T2, subject to the same 50% limitation. The expense reduces net income before calculating the small business deduction or general rate reduction.
 
 Enter the full meal amount on the income statement, then make a 50% add-back on Schedule 1 (Reconciliation of Income for Tax Purposes). Tax software handles this automatically - verify it by checking line 101 of Schedule 1.
 
@@ -98,4 +100,4 @@ If your corporation provides a meal allowance to employees for overtime work, CR
 
 Meal expenses, per diem rates, and the 50% limit create more T1 and T2 errors than almost any other expense category. Our Toronto accounting team reviews your business expenses to maximize legitimate deductions and keep your CRA claims bulletproof.
 
-**[Get a free quote today](https://prismaaccounting.com/contact)** and make sure you're claiming every dollar you're entitled to.
+**[Get a free quote today](/contact/)** and make sure you're claiming every dollar you're entitled to.

@@ -12,6 +12,8 @@ heroImage: /images/blog/max-cpp-contribution.webp
 
 If you run payroll in Ontario, the 2026 CPP maximum contribution limits are numbers you need to know cold. Remitting the wrong amount means either a CRA notice or a disgruntled employee. This guide covers the exact 2026 figures, how to calculate deductions, and what CPP2 adds to the picture.
 
+Our [payroll service in Toronto](/services/payroll/) handles CPP calculations and CRA remittances automatically.
+
 ## What Is the CPP Maximum Pensionable Earnings for 2026?
 
 The Year's Maximum Pensionable Earnings (YMPE) is the earnings ceiling used to calculate base CPP contributions. For 2026, the CRA set the YMPE at **$74,600** - up from $71,300 in 2025.
@@ -50,7 +52,7 @@ You match that amount dollar for dollar as the employer. The total payroll cost 
 
 For employees earning less than $74,600, replace $74,600 with their actual annual earnings. If an employee works part of the year or has multiple jobs, you still calculate based on what you pay them - you are not responsible for what other employers remit.
 
-Stop deducting CPP1 once the employee's year-to-date contributions reach $4,230.45. Most payroll software handles this automatically, but review payroll registers quarterly to catch errors before T4 season.
+Stop deducting CPP1 once the employee's year-to-date contributions reach $4,230.45. Most payroll software handles this automatically, but review payroll registers quarterly to catch errors before T4 season. If your corporation also needs to file a [corporate T2 return](/services/corporate-tax-t2/), CPP payroll amounts flow through to Schedule 1 reconciliation.
 
 ## CPP Enhancement (CPP2): 2026 Rates
 
@@ -98,4 +100,4 @@ If you manage payroll manually in a spreadsheet, consider switching to software 
 
 CPP deductions, T4 slips, and remittance schedules take time to get right - especially when you have multiple employees or a mix of full-time and part-time staff. Our Toronto accounting team handles payroll compliance for small businesses and growing companies across Ontario.
 
-**[Get a free quote today](https://prismaaccounting.com/contact)** and stop worrying about CRA payroll audits.
+**[Get a free quote today](/contact/)** and stop worrying about CRA payroll audits.

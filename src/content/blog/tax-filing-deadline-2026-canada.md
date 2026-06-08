@@ -20,6 +20,8 @@ Corporations use their own fiscal year end, which may or may not align with the 
 
 ## T1 Tax Filing Deadline 2026 for Individuals
 
+Need a Toronto accountant to file your [T1 personal tax return](/services/personal-tax-t1/)? Here are the key dates to know.
+
 **Deadline: April 30, 2026**
 
 If April 30 falls on a weekend or statutory holiday, the deadline moves to the next business day. For 2026, April 30 is a Thursday, so the deadline stays as April 30, 2026.
@@ -47,6 +49,8 @@ Self-employed individuals also need to file a T2125 (Statement of Business or Pr
 
 ## Corporate Tax Filing Deadline (T2)
 
+Filing a [corporate T2 return](/services/corporate-tax-t2/) on time avoids CRA interest and penalties on your corporation's balance owing.
+
 **Filing deadline: 6 months after fiscal year-end**
 
 **Payment deadline: 2 or 3 months after fiscal year-end** (depending on corporation type)
@@ -61,7 +65,7 @@ Most small Ontario corporations qualify as Canadian-Controlled Private Corporati
 
 ## HST/GST Filing Deadlines in Ontario
 
-If your Toronto business is registered for HST, your filing deadline depends on your reporting period:
+If your Toronto business is registered for [HST/GST](/services/hst-gst/), your filing deadline depends on your reporting period:
 
 | Reporting period | Due date |
 |---|---|
@@ -104,4 +108,4 @@ Even if you cannot pay your full balance, file on time to avoid the late-filing 
 
 Missing CRA deadlines costs real money. Our Toronto accounting team handles T1 personal tax returns, T2 corporate filings, and HST remittances for individuals and businesses across Ontario - all filed on time, all year.
 
-**[Get a free quote today](https://prismaaccounting.com/contact)** and take deadlines off your plate.
+**[Get a free quote today](/contact/)** and take deadlines off your plate.
