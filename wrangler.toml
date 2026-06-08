@@ -4,3 +4,31 @@ compatibility_date = "2025-05-31"
 [assets]
 directory = "./dist"
 not_found_handling = "404-page"
+
+[[headers]]
+pattern = "/*"
+
+[headers.rules]
+X-Content-Type-Options = "nosniff"
+X-Frame-Options = "SAMEORIGIN"
+Referrer-Policy = "strict-origin-when-cross-origin"
+Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+
+[[headers]]
+pattern = "/_astro/*"
+
+[headers.rules]
+Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+pattern = "/images/*"
+
+[headers.rules]
+Cache-Control = "public, max-age=86400"
+
+[[headers]]
+pattern = "/fonts/*"
+
+[headers.rules]
+Cache-Control = "public, max-age=31536000, immutable"
