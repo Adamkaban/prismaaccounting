@@ -1,5 +1,6 @@
 ---
 title: "Tax Filing Deadline 2026 Canada: Key Dates You Can't Miss"
+seoTitle: "Tax Filing Deadline 2026 | Prisma Financial"
 description: "T1 tax filing deadline for 2025 income is April 30, 2026. Self-employed filers get until June 15 - but payment is still due April 30. All 2026 CRA dates inside."
 pubDate: 2026-02-10
 author: "Prisma Financial"

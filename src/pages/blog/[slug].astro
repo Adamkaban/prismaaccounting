@@ -30,7 +30,7 @@ const breadcrumbs = [
 ---
 
 <BaseLayout
-  title={`${post.data.title} | Prisma Financial`}
+  title={post.data.seoTitle ?? `${post.data.title} | Prisma Financial`}
   description={post.data.description}
   path={`/blog/${post.id}/`}
   ogType="article"

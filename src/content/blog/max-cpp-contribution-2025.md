@@ -1,5 +1,6 @@
 ---
 title: "Max CPP Contribution 2026: Limits and Calculations for Employers"
+seoTitle: "Max CPP Contribution 2026 | Prisma Financial"
 description: "The 2026 max CPP contribution is $4,230.45 per employee and employer. YMPE is $74,600. Learn CPP2 rates, payroll calculations, and CRA compliance for Ontario."
 pubDate: 2026-01-15
 author: "Prisma Financial"

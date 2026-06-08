@@ -1,5 +1,6 @@
 ---
 title: "Ontario Tax Brackets 2026: Complete Guide for Residents"
+seoTitle: "Ontario Tax Brackets 2026 | Prisma Financial"
 description: "Ontario 2026 tax brackets: 5.05% to 13.16% provincial. Federal bottom rate dropped to 14%. Combined top rate 53.53%. Full bracket tables, BPA, and planning tips."
 pubDate: 2026-01-20
 author: "Prisma Financial"

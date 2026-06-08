@@ -1,5 +1,6 @@
 ---
 title: "CRA Meal Allowance 2026: Rates and How to Claim Business Expenses"
+seoTitle: "CRA Meal Allowance 2026 | Prisma Financial"
 description: "CRA meal allowance 2026: $23 per meal, $69/day maximum using the simplified method. How to claim business meal expenses on your T1 or T2 in Canada this year."
 pubDate: 2026-03-05
 author: "Prisma Financial"
