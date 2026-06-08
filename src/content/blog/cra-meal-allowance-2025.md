@@ -7,24 +7,6 @@ tags: ["CRA meal allowance 2026", "business expenses", "per diem", "T1", "T2"]
 heroImage: /images/blog/cra-meal-allowance.webp
 ---
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "CRA Meal Allowance 2026: Rates and How to Claim Business Expenses",
-  "datePublished": "2026-03-05",
-  "author": {
-    "@type": "Organization",
-    "name": "Prisma Financial"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Prisma Financial",
-    "url": "https://prismaaccounting.com"
-  }
-}
-</script>
-
 # CRA Meal Allowance 2026: Rates and How to Claim Business Expenses
 
 Business meals are one of the most frequently mishandled expense categories in Canadian tax returns. The rules differ depending on whether you're an employee, a self-employed individual, or a corporation - and they differ again based on whether you use the simplified method or the detailed method. This guide covers the CRA meal allowance rates for 2026 and how to claim them correctly on your T1 or T2.

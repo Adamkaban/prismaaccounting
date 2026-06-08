@@ -7,24 +7,6 @@ tags: ["ontario tax brackets 2026", "income tax", "CRA", "canada tax brackets 20
 heroImage: /images/blog/ontario-tax-brackets.webp
 ---
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "Ontario Tax Brackets 2026: Complete Guide for Residents",
-  "datePublished": "2026-01-20",
-  "author": {
-    "@type": "Organization",
-    "name": "Prisma Financial"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Prisma Financial",
-    "url": "https://prismaaccounting.com"
-  }
-}
-</script>
-
 # Ontario Tax Brackets 2026: Complete Guide for Residents
 
 Ontario residents pay two layers of income tax: federal and provincial. Understanding both sets of brackets helps you estimate your actual tax bill, plan RRSP contributions, and identify where a raise or a business income spike pushes you into a higher rate. This guide covers the exact 2026 numbers for Ontario residents, including a notable federal rate change and the provincial surtax that most bracket guides skip.

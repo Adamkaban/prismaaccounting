@@ -7,24 +7,6 @@ tags: ["tax deadline", "T1", "T2", "CRA", "tax filing canada"]
 heroImage: /images/blog/tax-filing-deadline.webp
 ---
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "Tax Filing Deadline 2026 Canada: Key Dates You Can't Miss",
-  "datePublished": "2026-02-10",
-  "author": {
-    "@type": "Organization",
-    "name": "Prisma Financial"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Prisma Financial",
-    "url": "https://prismaaccounting.com"
-  }
-}
-</script>
-
 # Tax Filing Deadline 2026 Canada: Key Dates You Can't Miss
 
 Missing a CRA tax deadline triggers interest charges and late-filing penalties that compound quickly. Whether you're an employee in Toronto, a self-employed contractor, or a corporation, this guide has every key deadline for the 2025 tax year (filed in 2026), with no important details buried in footnotes.

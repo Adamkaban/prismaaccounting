@@ -7,24 +7,6 @@ tags: ["CPP", "payroll", "employer", "CRA", "canada pension plan 2026"]
 heroImage: /images/blog/max-cpp-contribution.webp
 ---
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "Max CPP Contribution 2026: Limits and Calculations for Employers",
-  "datePublished": "2026-01-15",
-  "author": {
-    "@type": "Organization",
-    "name": "Prisma Financial"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Prisma Financial",
-    "url": "https://prismaaccounting.com"
-  }
-}
-</script>
-
 # Max CPP Contribution 2026: Limits and Calculations for Employers
 
 If you run payroll in Ontario, the 2026 CPP maximum contribution limits are numbers you need to know cold. Remitting the wrong amount means either a CRA notice or a disgruntled employee. This guide covers the exact 2026 figures, how to calculate deductions, and what CPP2 adds to the picture.
