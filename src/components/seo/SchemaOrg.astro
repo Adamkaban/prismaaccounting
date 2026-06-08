@@ -138,11 +138,13 @@ const articleNode = article
       datePublished: article.datePublished,
       ...(article.dateModified ? { dateModified: article.dateModified } : {}),
       ...(article.image ? { image: new URL(article.image, orgUrl).toString() } : {}),
-      author: {
-        '@type': 'Person',
-        name: article.author ?? SITE.name,
-        url: `${orgUrl}/about/`,
-      },
+      ...(article.author ? {
+        author: {
+          '@type': 'Person',
+          name: article.author,
+          url: `${orgUrl}/about/`,
+        },
+      } : {}),
       publisher: { '@id': `${orgUrl}/#organization` },
       inLanguage: 'en-CA',
     }
