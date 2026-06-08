@@ -1,4 +1,4 @@
-# Prisma Accounting
+# Prisma Financial
 
 > Toronto accounting firm for small businesses and self-employed individuals in Ontario. Personal tax (T1), corporate tax (T2), HST/GST, payroll, bookkeeping, and incorporation. Fixed CAD pricing, CRA-ready filing.
 
@@ -13,7 +13,7 @@
 
 ## About
 
-Prisma Accounting is a CPA-reviewed accounting firm based in Toronto, Ontario, Canada. We serve small business owners, sole proprietors, and incorporated companies across the Greater Toronto Area and Ontario remotely.
+Prisma Financial is a CPA-reviewed accounting firm based in Toronto, Ontario, Canada. We serve small business owners, sole proprietors, and incorporated companies across the Greater Toronto Area and Ontario remotely.
 
 Address: 150 King St W, Suite 200, Toronto, ON M5H 1J9
 Email: support@prismaaccounting.com
