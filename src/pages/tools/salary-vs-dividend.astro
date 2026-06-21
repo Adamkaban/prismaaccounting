@@ -28,12 +28,24 @@ const faqItems = [
     q: 'How accurate is this calculator?',
     a: 'It is accurate for a single income source in Ontario with no other credits, deductions, or carryforwards. Real situations vary - RRSP contributions, other income, prior losses, and other credits will all change the result. Use this as a starting point, not a filing tool.',
   },
+  {
+    q: 'Is it better to pay yourself salary or dividends in Canada?',
+    a: 'Neither is universally better. Salary reduces corporate taxable income and builds CPP and RRSP room, but adds CPP premiums and payroll admin. Dividends skip CPP and carry lower personal tax at many income levels, but forfeit RRSP room and retirement benefits. The best answer depends on your corporate profit, personal income needs, RRSP room remaining, and retirement plan. Run the numbers above for your situation, then discuss with a CPA before year-end.',
+  },
+  {
+    q: 'Why do some incorporated owners choose dividends over salary?',
+    a: 'Three main reasons. Dividends avoid CPP premiums - saving up to $3,867 in combined employee and employer contributions in 2026. Non-eligible dividends (paid from income taxed at the Ontario small business rate of 12.2%) carry a dividend tax credit that reduces personal tax below equivalent salary at many income levels. And dividends require no payroll account, no remittances, and no T4 - reducing admin cost. The trade-off is forfeited RRSP contribution room and no CPP entitlement at retirement.',
+  },
+  {
+    q: 'Can I split income with my spouse through dividends in Canada?',
+    a: 'Only if your spouse is a legitimate shareholder with shares carrying dividend rights, and only within the Tax on Split Income (TOSI) rules. Since 2018, dividends paid to family members are taxed at the highest marginal rate unless the recipient actively works in the business, is over 65, or meets specific CRA criteria. A CPA can structure share classes to maximize family income splitting within TOSI.',
+  },
 ];
 ---
 
 <BaseLayout
   title="Salary vs Dividend Calculator Ontario 2026"
-  description="Compare paying yourself salary vs dividends from your Ontario corporation. Real 2026 federal and Ontario tax rates. Free tool."
+  description="Compare salary vs dividends for your Ontario corporation. Includes CPP, EI, small business deduction, and non-eligible dividend tax credit. 2026 rates."
   path="/tools/salary-vs-dividend/"
   schemaVariant="page"
   breadcrumbs={breadcrumbs}
@@ -65,7 +77,7 @@ const faqItems = [
       </ol>
     </nav>
     <h1 class="text-5xl md:text-7xl font-medium tracking-tight leading-[1.05] text-balance max-w-3xl">
-      Salary vs Dividend Calculator
+      Salary vs Dividend Calculator - Ontario 2026
     </h1>
     <p class="mt-6 text-lg leading-relaxed text-[var(--color-ink-muted)] max-w-[58ch]">
       Enter your Ontario corporation's annual profit and your desired take-home to compare the real after-tax cost of paying yourself salary versus dividends. Uses 2026 federal and Ontario rates.
@@ -82,7 +94,7 @@ const faqItems = [
       <div>
         <h3 class="text-xl font-medium mb-3">Salary path</h3>
         <p class="text-[var(--color-ink-muted)] leading-relaxed">
-          Salary is deductible to the corporation, reducing corporate taxable income. The corporation also pays employer CPP and EI on top of the gross salary. You pay personal income tax, employee CPP, and employee EI. Total tax burden includes all of these - employer costs are a real cash outflow from the corporation.
+          Salary is deductible to the corporation, reducing corporate taxable income. The corporation pays employer CPP on top of the gross salary. Employer EI applies only if you hold 40% or fewer voting shares - most incorporated owner-operators are exempt. You pay personal income tax and employee CPP. Total tax burden includes all of these - employer costs are a real cash outflow from the corporation.
         </p>
       </div>
       <div>
@@ -91,6 +103,17 @@ const faqItems = [
           The corporation pays Ontario small business rate tax (12.2%) on its full profit first. The remaining after-tax pool is available as dividends. Dividends paid from small-business-rate income are "other than eligible" - they use a 15% gross-up and a reduced dividend tax credit. No CPP or EI applies.
         </p>
       </div>
+    </div>
+    <div class="max-w-4xl mt-10 space-y-4 text-[var(--color-ink-muted)] leading-relaxed text-base">
+      <p>
+        Both paths start from the same corporate profit. Ontario corporations first apply the small business deduction (SBD) if active business income is under $500,000 - combining to a 12.2% rate (federal 9% + Ontario 3.2%). Income above that limit is taxed at the general corporate rate, which changes the type of dividend available.
+      </p>
+      <p>
+        Non-eligible dividends - the kind most owner-managed corporations pay - carry a 15% federal gross-up and a reduced dividend tax credit. This calculator uses non-eligible dividend rates throughout, consistent with Ontario corporations operating under the small business deduction limit.
+      </p>
+      <p>
+        The calculator does not model shareholder loans or refundable dividend tax on hand (RDTOH). These are advanced planning tools your CPA uses after the salary-versus-dividend decision is made. The numbers here are directional - use them to understand the order of magnitude, then book a call to optimize your specific structure.
+      </p>
     </div>
   </Section>
 
@@ -108,7 +131,7 @@ const faqItems = [
           Get a free quote
         </h2>
         <p class="mt-5 text-lg leading-relaxed text-[var(--color-ink-muted)] max-w-sm">
-          Tell us your corporate structure and desired income. We respond within one business day with a recommendation and a flat CAD price.
+          Tell us your corporate profit and desired take-home. We identify whether salary, dividends, or a mix saves the most tax for your structure, and quote a flat CAD price before any work starts.
         </p>
         <p class="mt-6 text-sm text-[var(--color-ink-muted)]">
           Prefer email? Write to <a href={`mailto:${SITE.contact.email}`} class="text-[var(--color-ink)] underline underline-offset-4 hover:text-[var(--color-accent)] transition-colors">{SITE.contact.email}</a>.

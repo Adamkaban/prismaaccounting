@@ -33,7 +33,7 @@
       <div>
         <div class="flex items-center justify-between mb-3">
           <label for="desired-income-slider" class="text-sm font-medium">
-            Desired personal income
+            Gross income to pay yourself
           </label>
           <span id="desired-income-display" class="text-sm font-mono text-[var(--color-accent)] tabular-nums">$80,000</span>
         </div>
@@ -51,6 +51,17 @@
           <span>$30K</span><span>$250K</span>
         </div>
       </div>
+
+      <label class="flex items-center gap-3 text-sm cursor-pointer select-none">
+        <input
+          type="checkbox"
+          id="owner-exempt-check"
+          checked
+          class="rounded"
+          style="accent-color: var(--color-accent)"
+        />
+        <span>I own more than 40% of the corporation (EI exempt)</span>
+      </label>
 
     </div>
 
@@ -161,9 +172,29 @@
 
     </div>
 
+    <!-- Savings callout -->
+    <div
+      id="savings-callout"
+      hidden
+      class="mt-6 rounded-2xl border p-5"
+      style="border-color: var(--color-accent); background: color-mix(in srgb, var(--color-accent) 6%, var(--color-bg))"
+    >
+      <p class="text-sm font-medium text-[var(--color-ink)]">
+        <span id="savings-amount" class="font-mono"></span> total tax difference
+      </p>
+      <p class="text-sm text-[var(--color-ink-muted)] mt-1">
+        <span id="savings-winner-label"></span> saves more at your income level. Want to lock in this structure before year-end?
+      </p>
+      <a
+        href="#quote"
+        class="mt-3 inline-block text-sm font-medium underline underline-offset-4 transition-colors"
+        style="color: var(--color-accent)"
+      >Book a free call to optimize your structure</a>
+    </div>
+
     <!-- Disclaimer -->
     <p class="mt-8 text-sm text-[var(--color-ink-muted)] max-w-2xl leading-relaxed">
-      Estimates use 2026 federal and Ontario rates. Assumes single income source, Ontario resident, no other credits or deductions. Employer CPP and EI included in total tax burden. Not tax advice - consult a CPA for your situation.
+      Estimates use 2026 federal and Ontario rates. Assumes single income source, Ontario resident, no other credits or deductions. Employer CPP included in total tax burden. EI excluded when owner holds more than 40% of voting shares (CRA IT-83R3). Not tax advice - consult a CPA for your situation.
     </p>
 
   </div>
@@ -197,7 +228,8 @@
     el('corp-profit-display').textContent = fmt(corpProfit);
     el('desired-income-display').textContent = fmt(desired);
 
-    const sal = calcSalary(corpProfit, desired);
+    const ownerExempt = el<HTMLInputElement>('owner-exempt-check').checked;
+    const sal = calcSalary(corpProfit, desired, ownerExempt);
     const div = calcDividend(corpProfit, desired);
 
     // Salary card
@@ -244,9 +276,21 @@
     el('div-winner').hidden = salWins;
     el('sal-card').style.borderColor = salWins ? 'var(--color-accent)' : 'var(--color-line)';
     el('div-card').style.borderColor = salWins ? 'var(--color-line)' : 'var(--color-accent)';
+
+    // Savings callout
+    const diff = Math.abs(sal.totalTax - div.totalTax);
+    const callout = el('savings-callout');
+    if (diff >= 500) {
+      el('savings-amount').textContent = fmt(diff);
+      el('savings-winner-label').textContent = salWins ? 'Salary' : 'Dividends';
+      callout.hidden = false;
+    } else {
+      callout.hidden = true;
+    }
   }
 
   el<HTMLInputElement>('corp-profit-slider').addEventListener('input', update);
   el<HTMLInputElement>('desired-income-slider').addEventListener('input', update);
+  el<HTMLInputElement>('owner-exempt-check').addEventListener('change', update);
   update();
 </script>

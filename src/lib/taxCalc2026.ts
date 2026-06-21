@@ -158,9 +158,9 @@ export interface DividendResult {
   warning?: string;
 }
 
-export function calcSalary(corpProfit: number, salary: number): SalaryResult {
+export function calcSalary(corpProfit: number, salary: number, ownerExemptEI = false): SalaryResult {
   const cpp = calculateCPP(salary);
-  const ei = calculateEI(salary);
+  const ei = ownerExemptEI ? { employee: 0, employer: 0 } : calculateEI(salary);
   const corpSalaryCost = salary + cpp.employer + ei.employer;
   const remaining = Math.max(corpProfit - corpSalaryCost, 0);
   const corpTax = remaining * CORP_2026.ontarioSBR;
