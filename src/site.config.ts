@@ -100,7 +100,7 @@ export const NAV = [
   { label: 'Services', href: '/services/' },
   { label: 'Process', href: '/#process' },
   { label: 'FAQ', href: '/#faq' },
-  { label: 'Calculator', href: '/tools/salary-vs-dividend/' },
+  { label: 'Calculators', href: '/tools/' },
   { label: 'Blog', href: '/blog/' },
   { label: 'About', href: '/about/' },
   { label: 'Contact', href: '/contact/' },
@@ -113,6 +113,9 @@ export const FOOTER_LINKS = {
     { label: 'Blog', href: '/blog/' },
     { label: 'Contact', href: '/contact/' },
     { label: 'Privacy Policy', href: '/privacy-policy/' },
+  ],
+  tools: [
     { label: 'Salary vs Dividend', href: '/tools/salary-vs-dividend/' },
+    { label: 'Ontario Salary Calculator', href: '/tools/ontario-salary-calculator/' },
   ],
 };

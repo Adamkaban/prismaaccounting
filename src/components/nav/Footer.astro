@@ -55,13 +55,17 @@ const year = new Date().getFullYear();
     </div>
 
     <div class="md:col-span-2">
-      <p class="text-xs uppercase tracking-[0.18em] text-[var(--color-ink-muted)] font-medium">Start</p>
+      <p class="text-xs uppercase tracking-[0.18em] text-[var(--color-ink-muted)] font-medium">Tools</p>
       <ul class="mt-5 space-y-3 text-sm">
-        <li>
-          <a href={`/${SITE.cta.anchor}`} class="text-[var(--color-ink)] hover:text-[var(--color-accent)] transition-colors">
-            {SITE.cta.primary}
-          </a>
-        </li>
+        {
+          FOOTER_LINKS.tools.map((link) => (
+            <li>
+              <a href={link.href} class="text-[var(--color-ink)] hover:text-[var(--color-accent)] transition-colors">
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </div>
   </div>
