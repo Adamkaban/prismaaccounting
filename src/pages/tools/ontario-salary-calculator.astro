@@ -1,0 +1,143 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Section from '~/components/ui/Section.astro';
+import FAQ from '~/components/home/FAQ.astro';
+import TallyEmbed from '~/components/forms/TallyEmbed.astro';
+import OntarioSalaryCalc from '~/components/tools/OntarioSalaryCalc.astro';
+import { SITE } from '~/site.config';
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Ontario Salary Calculator', href: '/tools/ontario-salary-calculator/' },
+];
+
+const faqItems = [
+  {
+    q: 'How much tax do I pay on a $80,000 salary in Ontario?',
+    a: 'On an $80,000 gross salary in Ontario in 2026, you pay approximately $15,500 in federal income tax, $5,800 in Ontario income tax, $4,500 in CPP contributions, and $1,050 in EI premiums. Total deductions come to roughly $26,850, leaving a net take-home of about $53,150 per year ($4,430/month). Your effective rate is about 33.6%. Use the calculator above to see exact numbers for your salary.',
+  },
+  {
+    q: 'How do I calculate my net pay in Ontario?',
+    a: 'To calculate Ontario net pay: start with your gross salary and subtract four deductions. Federal income tax uses federal brackets minus your basic personal amount ($16,129 in 2026) and CPP/EI credits. Ontario income tax uses Ontario brackets plus surtax, minus the Ontario basic personal amount ($11,141) and credits. CPP employee contributions are 5.95% of earnings between $3,500 and $68,500. EI premiums are 1.66% on earnings up to $63,200. What remains after all four is your net take-home.',
+  },
+  {
+    q: 'What is the average take-home pay in Ontario?',
+    a: 'The average employment income in Ontario is approximately $60,000-$65,000 per year. After federal and Ontario income tax, CPP, and EI, the average take-home pay in Ontario works out to roughly $44,000-$48,000 per year, or $3,650-$4,000 per month. The exact amount depends on your salary, whether you have other income or deductions, and any additional credits you qualify for.',
+  },
+  {
+    q: 'How much CPP is deducted from my paycheque in Ontario?',
+    a: 'In 2026, CPP employee contributions are 5.95% of earnings between the $3,500 basic exemption and $68,500 (the Year Maximum Pensionable Earnings). The maximum CPP1 employee contribution is approximately $3,867 per year. There is also a CPP2 enhancement: an additional 4% on earnings between $68,500 and $73,200, capped at about $188. So the total maximum CPP employee contribution in 2026 is roughly $4,055.',
+  },
+  {
+    q: 'Is a $100,000 salary good in Toronto?',
+    a: 'A $100,000 salary in Toronto puts you above the median employment income for the city. After federal and Ontario taxes, CPP, and EI, you take home roughly $69,000-$71,000 per year (about $5,750-$5,900 per month). Whether that is comfortable in Toronto depends heavily on housing costs. The effective tax rate at $100,000 is about 29-31% of gross pay.',
+  },
+];
+---
+
+<BaseLayout
+  title="Ontario Salary Calculator 2026 - Net Pay After Tax"
+  description="Calculate your net take-home pay from a salary in Ontario. Shows federal tax, Ontario tax, CPP, and EI deductions. 2026 rates, free to use."
+  path="/tools/ontario-salary-calculator/"
+  schemaVariant="page"
+  breadcrumbs={breadcrumbs}
+  faqItems={faqItems}
+>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Ontario Salary Calculator 2026',
+    description: 'Calculate net take-home pay from a salary in Ontario. Includes federal income tax, Ontario income tax, CPP contributions, and EI premiums. 2026 CRA rates.',
+    url: `${SITE.url}/tools/ontario-salary-calculator/`,
+    applicationCategory: 'FinanceApplication',
+    operatingSystem: 'Any',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'CAD' },
+    featureList: [
+      'Federal and Ontario income tax calculation',
+      'CPP contribution calculation (CPP1 + CPP2)',
+      'EI premium calculation',
+      'Monthly and biweekly net pay breakdown',
+      '2026 CRA rates',
+    ],
+  })} />
+
+  <Section id="hero">
+    <nav aria-label="Breadcrumb" class="mb-8 text-sm text-[var(--color-ink-muted)]">
+      <ol class="flex items-center gap-2">
+        {breadcrumbs.map((crumb, i) => (
+          <li class="flex items-center gap-2">
+            {i > 0 && <span aria-hidden="true">/</span>}
+            {i < breadcrumbs.length - 1
+              ? <a href={crumb.href} class="hover:text-[var(--color-ink)] transition-colors">{crumb.name}</a>
+              : <span class="text-[var(--color-ink)]">{crumb.name}</span>
+            }
+          </li>
+        ))}
+      </ol>
+    </nav>
+    <h1 class="text-5xl md:text-7xl font-medium tracking-tight leading-[1.05] text-balance max-w-3xl">
+      Ontario Salary Calculator 2026
+    </h1>
+    <p class="mt-6 text-lg leading-relaxed text-[var(--color-ink-muted)] max-w-[58ch]">
+      Enter your gross annual salary and see your net take-home pay after federal income tax, Ontario income tax, CPP contributions, and EI premiums. Uses 2026 CRA rates.
+    </p>
+  </Section>
+
+  <OntarioSalaryCalc />
+
+  <Section id="how-it-works" divider>
+    <h2 class="text-4xl md:text-5xl font-medium tracking-tight leading-[1.1] text-balance mb-8 max-w-lg">
+      What gets deducted from your paycheque
+    </h2>
+    <div class="grid gap-10 md:grid-cols-2 max-w-4xl">
+      <div>
+        <h3 class="text-xl font-medium mb-3">Federal and Ontario income tax</h3>
+        <p class="text-[var(--color-ink-muted)] leading-relaxed">
+          Federal tax uses graduated brackets from 15% on the first $57,375 up to 33% above $220,000. The basic personal amount ($16,129 in 2026) gives you a credit of about $2,419 off your federal bill. Ontario adds its own brackets from 5.05% to 13.16%, plus a surtax on Ontario tax over $5,315. Most Ontarians with employment income pay a combined federal and provincial marginal rate of 31.5% to 43.4%.
+        </p>
+      </div>
+      <div>
+        <h3 class="text-xl font-medium mb-3">CPP and EI</h3>
+        <p class="text-[var(--color-ink-muted)] leading-relaxed">
+          CPP employee contributions are 5.95% on earnings between the $3,500 exemption and $68,500. A second enhancement (CPP2) adds 4% on earnings between $68,500 and $73,200. EI premiums are 1.66% on insurable earnings up to $63,200. Both CPP and EI contributions give you a 15% federal tax credit and a 5.05% Ontario credit, so part of what you pay comes back through your return.
+        </p>
+      </div>
+    </div>
+    <div class="max-w-4xl mt-10 space-y-4 text-[var(--color-ink-muted)] leading-relaxed text-base">
+      <p>
+        This calculator assumes you are an Ontario resident with employment income as your only income source, and no other deductions or credits beyond the basic personal amount. Real situations - RRSP contributions, union dues, eligible dependent credits, disability tax credits - will reduce your tax further. If you are self-employed, your CPP rate is higher (you pay both employee and employer portions) and you can deduct business expenses before tax applies.
+      </p>
+      <p>
+        If you run an incorporated business and pay yourself a mix of salary and dividends, the after-tax math is different. Our
+        <a href="/tools/salary-vs-dividend/" class="text-[var(--color-accent)] underline underline-offset-4 hover:text-[var(--color-accent-hi)] transition-colors">Salary vs Dividend Calculator</a>
+        models the corporate tax side and helps you find the optimal split for your Ontario corporation.
+      </p>
+    </div>
+  </Section>
+
+  <FAQ
+    id="faq"
+    heading="Salary and tax questions"
+    intro="What Ontario employees and self-employed workers ask most about take-home pay."
+    items={faqItems}
+  />
+
+  <Section id="quote" bg="elev" divider>
+    <div class="grid gap-10 md:grid-cols-12 items-start">
+      <div class="md:col-span-5">
+        <h2 class="text-4xl md:text-5xl font-medium tracking-tight leading-[1.1] text-balance">
+          Get a free quote
+        </h2>
+        <p class="mt-5 text-lg leading-relaxed text-[var(--color-ink-muted)] max-w-sm">
+          Running payroll in Ontario or trying to figure out the right salary for yourself? Our team quotes a flat CAD price for payroll setup or personal tax filing within one business day.
+        </p>
+        <p class="mt-6 text-sm text-[var(--color-ink-muted)]">
+          Prefer email? Write to <a href={`mailto:${SITE.contact.email}`} class="text-[var(--color-ink)] underline underline-offset-4 hover:text-[var(--color-accent)] transition-colors">{SITE.contact.email}</a>.
+        </p>
+      </div>
+      <div class="md:col-span-7">
+        <TallyEmbed title="Ontario salary calculator quote" />
+      </div>
+    </div>
+  </Section>
+</BaseLayout>
